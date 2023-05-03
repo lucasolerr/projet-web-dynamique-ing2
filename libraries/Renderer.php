@@ -10,5 +10,4 @@ class Renderer {
     
         require('view/layout.html.php');
     }
-
 }
