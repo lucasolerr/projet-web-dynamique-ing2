@@ -1,4 +1,4 @@
-<h2>Activitées proposées</h2>
+<h2>Boxs proposées</h2>
 <div class="table-responsive">
     <table class="table table-striped table-sm">
         <thead>
