@@ -4,7 +4,7 @@ namespace Models;
 
 class Partner extends Model {
     protected $table = "account";
-    public $email = "luca.soler@edu.ece.fr";
+    public $email = "antoine.grenouillet@edu.ece.fr";
 
     public function getCompanyName() : array
     {
@@ -44,11 +44,26 @@ class Partner extends Model {
 
     public function getInformationAccount() : array
     {
-        $sql = "SELECT * FROM {$this->table}";
+        $sql = "SELECT * FROM {$this->table} WHERE email = '{$this->email}'";
         $query = $this->pdo->prepare($sql);
         $query->execute();
         $accountInfos = $query->fetchAll();
 
         return $accountInfos;
+    }
+
+    public function getBoxs() : array
+    {
+        $sql = "
+        SELECT box_id, box_title, box_content, box_price FROM {$this->table}
+        JOIN activity_offer ON {$this->table}.email = activity_offer.partner_email
+        JOIN activity ON activity.activity_id = activity_offer.activity_id
+        JOIN omnesbox ON omnesbox.activity_id = activity.activity_id
+        WHERE email = '{$this->email}'
+        ";
+        $query = $this->pdo->prepare($sql);
+        $query->execute();
+        $boxs = $query->fetchAll();
+        return $boxs;
     }
 }

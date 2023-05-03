@@ -40,4 +40,13 @@ class Partner extends Controller
         $contentSection = ob_get_clean();
         return $contentSection;
     }
+
+    public function boxs() : string
+    {
+        $boxs = $this->model->getBoxs();
+        ob_start();
+        require('view/partner/boxs.html.php');
+        $contentSection = ob_get_clean();
+        return $contentSection;
+    }
 }
