@@ -8,17 +8,36 @@ class Partner extends Controller
 
     public function index()
     {
-        $accounts = $this->model->findAll();
         $pageTitle = "Espace Partenaires";
-        var_dump($accounts);
-        \Renderer::render('/partner/index', compact('accounts', 'pageTitle'));
+        $companyName = $this->model->getCompanyName();
+        if(!empty($_GET['section'])){
+            $section = $_GET['section'];
+        } else {
+            $section = 'account';
+        }
+        if(!method_exists(Partner::class, $section)){
+            echo 'Erreur 404';
+            return;
+        } 
+        $contentSection = $this->$section();
+        \Renderer::render('/partner/index', compact('companyName', 'contentSection', 'pageTitle'));
     }
 
-    public function showActivities()
+    public function activities() : string
     {
-        $pageTitle = "Espace Partenaires";
-        $activities = $this->model->findAllActivities();
-        //var_dump($activities);
-        \Renderer::render('/partner/index', compact('activities', 'pageTitle'));
+        $activities = $this->model->getAllActivities();
+        ob_start();
+        require('view/partner/activities.html.php');
+        $contentSection = ob_get_clean();
+        return $contentSection;
+    }
+
+    public function account() : string
+    {
+        $accountInfos = $this->model->getInformationAccount();
+        ob_start();
+        require('view/partner/account.html.php');
+        $contentSection = ob_get_clean();
+        return $contentSection;
     }
 }

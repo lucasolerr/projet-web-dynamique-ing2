@@ -6,6 +6,15 @@ class Partner extends Model {
     protected $table = "account";
     public $email = "luca.soler@edu.ece.fr";
 
+    public function getCompanyName() : array
+    {
+        $sql = "SELECT last_name FROM {$this->table} WHERE email = :email";
+        $query = $this->pdo->prepare($sql);
+        $query->execute(['email' => $this->email]);
+
+        return $query->fetch();
+    }
+
     public function findAll(?string $order = "") : array
     {
         $sql = "SELECT * FROM {$this->table} WHERE account_type = 'partner'";
@@ -18,7 +27,7 @@ class Partner extends Model {
         return $items;
     }
 
-    public function findAllActivities() : array
+    public function getAllActivities() : array
     {
         $sql = "
         SELECT activity.activity_id, activity_title, activity_content FROM {$this->table}
@@ -31,5 +40,15 @@ class Partner extends Model {
         $activities = $query->fetchAll();
 
         return $activities;
+    }
+
+    public function getInformationAccount() : array
+    {
+        $sql = "SELECT * FROM {$this->table}";
+        $query = $this->pdo->prepare($sql);
+        $query->execute();
+        $accountInfos = $query->fetchAll();
+
+        return $accountInfos;
     }
 }
