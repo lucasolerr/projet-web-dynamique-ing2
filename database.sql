@@ -9,6 +9,7 @@ DROP TABLE IF EXISTS activity_offer;
 DROP TABLE IF EXISTS box_offer;
 DROP TABLE IF EXISTS in_cart;
 DROP TABLE IF EXISTS purchase;
+DROP TABLE IF EXISTS to_offer;
 DROP TABLE IF EXISTS possession;
 DROP TABLE IF EXISTS used;
 
@@ -69,15 +70,19 @@ CREATE TABLE purchase(
     CONSTRAINT FK9 FOREIGN KEY (box_id) REFERENCES omnesbox(box_id)
 );
 
+CREATE TABLE to_offer(
+    to_offer_id INT NOT NULL PRIMARY KEY,
+    to_offer_password VARCHAR(20),
+    CONSTRAINT FK10 FOREIGN KEY (to_offer_id) REFERENCES purchase(purchase_id)
+);
+
 CREATE TABLE possession(
     possession_id INT NOT NULL PRIMARY KEY,
     possession_date DATE,
     user_email VARCHAR(40) NOT NULL,
-    box_id INT NOT NULL,
     chosen_partner_email VARCHAR(40),
-    CONSTRAINT FK10 FOREIGN KEY (possession_id) REFERENCES purchase(purchase_id),
-    CONSTRAINT FK11 FOREIGN KEY (user_email) REFERENCES account(email),
-    CONSTRAINT FK12 FOREIGN KEY (box_id) REFERENCES omnesbox(box_id),
+    CONSTRAINT FK11 FOREIGN KEY (possession_id) REFERENCES purchase(purchase_id),
+    CONSTRAINT FK12 FOREIGN KEY (user_email) REFERENCES account(email),
     CONSTRAINT FK13 FOREIGN KEY (chosen_partner_email) REFERENCES account(email)
 );
 
@@ -87,12 +92,10 @@ CREATE TABLE used(
     grade INT,
     comment TEXT,
     user_email VARCHAR(40) NOT NULL,
-    box_id INT NOT NULL,
     chosen_partner_email VARCHAR(40) NOT NULL,
     CONSTRAINT FK14 FOREIGN KEY (used_id) REFERENCES purchase(purchase_id),
     CONSTRAINT FK15 FOREIGN KEY (user_email) REFERENCES account(email),
-    CONSTRAINT FK16 FOREIGN KEY (box_id) REFERENCES omnesbox(box_id),
-    CONSTRAINT FK17 FOREIGN KEY (chosen_partner_email) REFERENCES account(email)
+    CONSTRAINT FK16 FOREIGN KEY (chosen_partner_email) REFERENCES account(email)
 );
 
 INSERT INTO account (email,last_name,first_name,account_password,account_type) VALUES
@@ -136,11 +139,15 @@ INSERT INTO in_cart(user_email,box_id,articles_number) VALUES
 INSERT INTO purchase(user_email,box_id,purchase_date) VALUES
 ("bla.bla@gmail.com",1,'2023-05-02'),
 ("bla.bla@gmail.com",2,'2023-05-03'),
-("sioul.duaner@gmail.com",2,'2023-05-03');
+("sioul.duaner@gmail.com",2,'2023-05-03'),
+("sioul.duaner@gmail.com",4,'2023-05-03');
 
-INSERT INTO possession(possession_id,user_email,box_id,possession_date,chosen_partner_email) VALUES
-(1,"bla.bla@gmail.com",1,'2023-05-02',NULL),
-(2,"sioul.duaner@gmail.com",2,'2023-05-03',"luca.soler@edu.ece.fr");
+INSERT INTO to_offer(to_offer_id,to_offer_password) VALUES
+(4,"123456789");
 
-INSERT INTO used(used_id,user_email,box_id,used_date,chosen_partner_email,grade,comment) VALUES
-(3,"sioul.duaner@gmail.com",2,'2023-05-03',"luca.soler@edu.ece.fr",4,"tres bien !!!");
+INSERT INTO possession(possession_id,user_email,possession_date,chosen_partner_email) VALUES
+(1,"bla.bla@gmail.com",'2023-05-02',NULL),
+(2,"sioul.duaner@gmail.com",'2023-05-03',"luca.soler@edu.ece.fr");
+
+INSERT INTO used(used_id,user_email,used_date,chosen_partner_email,grade,comment) VALUES
+(3,"sioul.duaner@gmail.com",'2023-05-03',"luca.soler@edu.ece.fr",4,"tres bien !!!");
