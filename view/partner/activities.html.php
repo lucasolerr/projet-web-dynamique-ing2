@@ -15,7 +15,7 @@
                     <td><?= $activity['activity_title'] ?></td>
                     <td><?= $activity['activity_content'] ?></td>
                 </tr>
-            <?php endforeach; ?>
+            <?php endforeach;?>
         </tbody>
     </table>
 </div>
