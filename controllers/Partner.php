@@ -26,27 +26,21 @@ class Partner extends Controller
     public function activities() : string
     {
         $activities = $this->model->getAllActivities();
-        ob_start();
-        require('view/partner/activities.html.php');
-        $contentSection = ob_get_clean();
+        $contentSection = \Renderer::extractRender('view/partner/activities.html.php', compact('activities'));
         return $contentSection;
     }
 
     public function account() : string
     {
         $accountInfos = $this->model->getInformationAccount();
-        ob_start();
-        require('view/partner/account.html.php');
-        $contentSection = ob_get_clean();
+        $contentSection = \Renderer::extractRender('view/partner/account.html.php', compact('accountInfos'));
         return $contentSection;
     }
 
     public function boxs() : string
     {
         $boxs = $this->model->getBoxs();
-        ob_start();
-        require('view/partner/boxs.html.php');
-        $contentSection = ob_get_clean();
+        $contentSection = \Renderer::extractRender('view/partner/boxs.html.php', compact('boxs'));
         return $contentSection;
     }
 }
