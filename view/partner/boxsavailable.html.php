@@ -1,5 +1,9 @@
-<?php $var = '' ?>
-<h2>Pour l'activitée <?= $boxs[0]['activity_id'] ?> : <?= $boxs[0]['activity_title'] ?></h2>
+<?php if (!empty($boxs)) : ?>
+    <h2>Pour l'activitée <?= $boxs[0]['activity_id'] ?> : <?= $boxs[0]['activity_title'] ?></h2>
+<?php else : ?>
+    <h2>Aucune boxs liées à l'activitée <?= $_GET['activity_id'] ?></h2>
+<?php endif; ?>
+
 <div class="table-responsive">
     <table class="table table-striped table-sm">
         <thead>
@@ -13,17 +17,37 @@
         </thead>
         <tbody>
             <?php foreach ($boxs as $box) : ?>
-                <tr>
+                <?php
+                $isSelected = '';
+                if ($box['isSelected']) {
+                    $isSelected = 'checked';
+                    $class = 'bg-success-subtle';
+                } else {
+                    $isSelected = '';
+                    $class = 'bg-danger-subtle';
+                }
+                ?>
+                <tr class="<?php echo $class ?>">
                     <td><?= $box['box_id'] ?></td>
                     <td><?= $box['box_title'] ?></td>
                     <td><?= $box['box_content'] ?></td>
                     <td><?= $box['box_price'] ?></td>
-                    <?php ($box['isSelected']) ? $var = 'checked' : $var = ''; ?>
                     <td>
-                        <input type="checkbox" name="checkbox" id="checkbox" disabled <?= $var ?>>
+                        <input type="checkbox" name="checkbox" class="box-checkbox" data-box-id="<?= $box['box_id'] ?>" <?= $isSelected ?>>
                     </td>
                 </tr>
-            <?php endforeach;?>
+            <?php endforeach; ?>
         </tbody>
     </table>
 </div>
+
+<script>
+    $(document).ready(function() {
+        $('.box-checkbox').change(function() {
+            var boxId = $(this).data('box-id');
+            var isChecked = $(this).is(':checked');
+            var selectedValue = (isChecked) ? 'true' : 'false';
+            window.location.href = "index.php?controller=partner&task=index&section=boxsFromActivityFromSite&activity_id=<?= $_GET['activity_id']; ?>&selected=" + selectedValue + "&box_id=" + boxId;
+        });
+    });
+</script>

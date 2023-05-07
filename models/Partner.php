@@ -5,7 +5,8 @@ namespace Models;
 class Partner extends Model
 {
     protected $table = "account";
-    public $email = "antoine.grenouillet@edu.ece.fr";
+    public $email = "luca.soler@edu.ece.fr";
+    //public $email = "antoine.grenouillet@edu.ece.fr";
 
     public function getCompanyName(): array
     {
@@ -82,10 +83,9 @@ class Partner extends Model
     public function getBoxsFromPartner(): array
     {
         $sql = "
-        SELECT box_id, box_title, box_content, box_price FROM {$this->table}
-        JOIN activity_offer ON {$this->table}.email = activity_offer.partner_email
-        JOIN activity ON activity.activity_id = activity_offer.activity_id
-        JOIN omnesbox ON omnesbox.activity_id = activity.activity_id
+        SELECT box_offer.box_id, box_title, box_content, box_price FROM {$this->table}
+        JOIN box_offer ON {$this->table}.email = box_offer.partner_email
+        JOIN omnesbox ON omnesbox.box_id = box_offer.box_id
         WHERE email = '{$this->email}'
         ";
         $query = $this->pdo->prepare($sql);
@@ -123,5 +123,22 @@ class Partner extends Model
     {
         $query = $this->pdo->prepare("DELETE FROM activity_offer WHERE activity_id = :activity_id AND partner_email = :partner_email");
         $query->execute(['activity_id' => $activity_id, 'partner_email' => $this->email]);
+    }
+
+    public function addBoxForPartner($box_id)
+    {
+        $this->add(
+            'box_offer',
+            [
+                'partner_email' => $this->email,
+                'box_id' => $box_id,
+            ]
+        );
+    }
+
+    public function deleteBoxForPartner($box_id)
+    {
+        $query = $this->pdo->prepare("DELETE FROM box_offer WHERE box_id = :box_id AND partner_email = :partner_email");
+        $query->execute(['box_id' => $box_id, 'partner_email' => $this->email]);
     }
 }

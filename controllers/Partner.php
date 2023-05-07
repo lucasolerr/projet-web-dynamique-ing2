@@ -84,10 +84,16 @@ class Partner extends Controller
         } else {
             return 'error';
         }
-        $boxs = $this->model->getBoxesFromActivityFromSite($activity_id);
-        if(!$boxs){
-            \Http::redirect('index.php?controller=partner&task=index&section=activities&error_message=');
+        $selected = filter_input(INPUT_GET, 'selected', FILTER_VALIDATE_BOOLEAN);
+        $box_id = filter_input(INPUT_GET, 'box_id', FILTER_VALIDATE_INT);
+        if(!is_null($selected) && !is_null($box_id)){
+            if($selected === true){
+                $this->model->addBoxForPartner($box_id);
+            } else {
+                $this->model->deleteBoxForPartner($box_id);
+            }
         }
+        $boxs = $this->model->getBoxesFromActivityFromSite($activity_id);
         $boxsFromPartner = $this->model->getBoxsFromPartner();
         $this->isBoxSelectedForPartner($boxs, $boxsFromPartner);
         $contentSection = \Renderer::extractRender('view/partner/boxsavailable.html.php', compact('boxs'));
