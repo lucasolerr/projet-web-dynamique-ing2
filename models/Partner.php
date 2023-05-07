@@ -2,11 +2,12 @@
 
 namespace Models;
 
-class Partner extends Model {
+class Partner extends Model
+{
     protected $table = "account";
-    public $email = "luca.soler@edu.ece.fr";
+    public $email = "antoine.grenouillet@edu.ece.fr";
 
-    public function getCompanyName() : array
+    public function getCompanyName(): array
     {
         $sql = "SELECT last_name FROM {$this->table} WHERE email = :email";
         $query = $this->pdo->prepare($sql);
@@ -15,10 +16,10 @@ class Partner extends Model {
         return $query->fetch();
     }
 
-    public function findAll(?string $order = "") : array
+    public function findAll(?string $order = ""): array
     {
         $sql = "SELECT * FROM {$this->table} WHERE account_type = 'partner'";
-        if($order){
+        if ($order) {
             $sql .= " ORDER BY " . $order;
         }
         $resultats = $this->pdo->query($sql);
@@ -27,7 +28,7 @@ class Partner extends Model {
         return $items;
     }
 
-    public function getActivitiesFromSite() : array
+    public function getActivitiesFromSite(): array
     {
         $sql = "
         SELECT * FROM activity
@@ -39,7 +40,7 @@ class Partner extends Model {
         return $activities;
     }
 
-    public function getBoxesFromActivityFromSite($activity_id) : array
+    public function getBoxesFromActivityFromSite($activity_id): array
     {
         $sql = "
         SELECT * FROM activity
@@ -53,7 +54,7 @@ class Partner extends Model {
         return $activities;
     }
 
-    public function getAllActivitiesFromPartner() : array
+    public function getAllActivitiesFromPartner(): array
     {
         $sql = "
         SELECT activity.activity_id, activity_title, activity_content FROM {$this->table}
@@ -68,7 +69,7 @@ class Partner extends Model {
         return $activities;
     }
 
-    public function getInformationAccount() : array
+    public function getInformationAccount(): array
     {
         $sql = "SELECT * FROM {$this->table} WHERE email = '{$this->email}'";
         $query = $this->pdo->prepare($sql);
@@ -78,7 +79,7 @@ class Partner extends Model {
         return $accountInfos;
     }
 
-    public function getBoxsFromPartner() : array
+    public function getBoxsFromPartner(): array
     {
         $sql = "
         SELECT box_id, box_title, box_content, box_price FROM {$this->table}
@@ -93,7 +94,7 @@ class Partner extends Model {
         return $boxs;
     }
 
-    public function getClientsFromPartner() : array
+    public function getClientsFromPartner(): array
     {
         $sql = "
         SELECT omnesbox.box_id, box_title, box_content, box_price, purchase.purchase_date, possession.user_email FROM omnesbox
@@ -105,5 +106,22 @@ class Partner extends Model {
         $query->execute();
         $clients = $query->fetchAll();
         return $clients;
+    }
+
+    public function addActivityForPartner($activity_id)
+    {
+        $this->add(
+            'activity_offer',
+            [
+                'partner_email' => $this->email,
+                'activity_id' => $activity_id,
+            ]
+        );
+    }
+
+    public function deleteActivityForPartner($activity_id)
+    {
+        $query = $this->pdo->prepare("DELETE FROM activity_offer WHERE activity_id = :activity_id AND partner_email = :partner_email");
+        $query->execute(['activity_id' => $activity_id, 'partner_email' => $this->email]);
     }
 }

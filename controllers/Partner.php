@@ -2,8 +2,6 @@
 
 namespace Controllers;
 
-use Http;
-
 class Partner extends Controller 
 {
     protected $modelName = \Models\Partner::class;
@@ -27,6 +25,15 @@ class Partner extends Controller
 
     public function activities() : string
     {
+        $selected = filter_input(INPUT_GET, 'selected', FILTER_VALIDATE_BOOLEAN);
+        $activity_id = filter_input(INPUT_GET, 'activity_id', FILTER_VALIDATE_INT);
+        if(!is_null($selected) && !is_null($activity_id)){
+            if($selected === true){
+                $this->model->addActivityForPartner($activity_id);
+            } else {
+                $this->model->deleteActivityForPartner($activity_id);
+            }
+        }
         $activities = $this->model->getActivitiesFromSite();
         $activitiesFromPartner = $this->model->getAllActivitiesFromPartner();
         $this->isActivitySelectedForPartner($activities, $activitiesFromPartner);
