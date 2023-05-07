@@ -20,7 +20,7 @@
                     <td><?= $activity['activity_content'] ?></td>
                     <td><input type="checkbox" name="checkbox" class="activity-checkbox" data-activity-id="<?= $activity['activity_id'] ?>" <?= $isSelected ?>></td>
                     <td>
-                        <a href="index.php?controller=partner&task=index&section=boxsFromActivityFromSite&activity_id=<?= $activity['activity_id'] ?>">
+                        <a href="index.php?controller=partner&task=index&section=boxs&activity_id=<?= $activity['activity_id'] ?>">
                             <i class="bi bi-chevron-right"></i>
                         </a>
                     </td>

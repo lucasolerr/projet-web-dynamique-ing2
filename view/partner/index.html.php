@@ -24,19 +24,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="index.php?controller=partner&task=index&section=activities">
                             <i class="bi bi-broadcast"></i>
-                            Activitées
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.php?controller=partner&task=index&section=boxs">
-                            <i class="bi bi-boxes"></i>
-                            Boxs
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.php?controller=partner&task=index&section=clients">
-                            <i class="bi bi-bag"></i>
-                            Clients
+                            Dashboard
                         </a>
                     </li>
                 </ul>

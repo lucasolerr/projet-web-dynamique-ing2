@@ -94,18 +94,33 @@ class Partner extends Model
         return $boxs;
     }
 
-    public function getClientsFromPartner(): array
+    public function getClientsFromBoxFromPartner($box_id): array
     {
         $sql = "
         SELECT omnesbox.box_id, box_title, box_content, box_price, purchase.purchase_date, possession.user_email FROM omnesbox
         JOIN purchase ON omnesbox.box_id = purchase.box_id
         JOIN possession ON purchase.purchase_id = possession.possession_id
-        WHERE chosen_partner_email = '{$this->email}'
+        WHERE chosen_partner_email = :partner_email AND omnesbox.box_id = :box_id
         ";
         $query = $this->pdo->prepare($sql);
-        $query->execute();
+        $query->execute(['partner_email' => $this->email, 'box_id' => $box_id]);
         $clients = $query->fetchAll();
         return $clients;
+    }
+
+    public function isActivitySelectedForPartner($activity_id): bool
+    {
+        $sql = "
+        SELECT * FROM activity
+        JOIN activity_offer on activity_offer.activity_id = activity.activity_id
+        WHERE activity.activity_id = :activity_id and partner_email = :partner_email";
+        $query = $this->pdo->prepare($sql);
+        $query->execute(['activity_id' => $activity_id, 'partner_email' => $this->email]);
+        $activities = $query->fetchAll();
+        if (!empty($activities)) {
+            return true;
+        }
+        return false;
     }
 
     public function addActivityForPartner($activity_id)
@@ -121,6 +136,20 @@ class Partner extends Model
 
     public function deleteActivityForPartner($activity_id)
     {
+        $sql = "
+        SELECT box_id FROM activity_offer
+        JOIN activity ON activity_offer.activity_id = activity.activity_id
+        JOIN omnesbox ON omnesbox.activity_id = activity.activity_id
+        WHERE activity.activity_id = :activity_id AND partner_email = :partner_email";
+        $query = $this->pdo->prepare($sql);
+        $query->execute(['activity_id' => $activity_id, 'partner_email' => $this->email]);
+        // On récupère tous les ids des boxs liés à l'activitée
+        $boxIds = $query->fetchAll();
+        // On les déselectionne pour le partner
+        foreach($boxIds as $boxId) {
+            $this->deleteBoxForPartner((string) $boxId['box_id']);
+        }
+        // On déselectionne l'activitée pour le partner
         $query = $this->pdo->prepare("DELETE FROM activity_offer WHERE activity_id = :activity_id AND partner_email = :partner_email");
         $query->execute(['activity_id' => $activity_id, 'partner_email' => $this->email]);
     }
@@ -136,7 +165,7 @@ class Partner extends Model
         );
     }
 
-    public function deleteBoxForPartner($box_id)
+    public function deleteBoxForPartner(string $box_id)
     {
         $query = $this->pdo->prepare("DELETE FROM box_offer WHERE box_id = :box_id AND partner_email = :partner_email");
         $query->execute(['box_id' => $box_id, 'partner_email' => $this->email]);
