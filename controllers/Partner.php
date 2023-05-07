@@ -43,4 +43,11 @@ class Partner extends Controller
         $contentSection = \Renderer::extractRender('view/partner/boxs.html.php', compact('boxs'));
         return $contentSection;
     }
+
+    public function clients() : string
+    {
+        $clients = $this->model->getClients();
+        $contentSection = \Renderer::extractRender('view/partner/clients.html.php', compact('clients'));
+        return $contentSection;
+    }
 }

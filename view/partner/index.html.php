@@ -33,6 +33,12 @@
                             Boxs
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.php?controller=partner&task=index&section=clients">
+                            <i class="bi bi-bag"></i>
+                            Clients
+                        </a>
+                    </li>
                 </ul>
         </nav>
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
