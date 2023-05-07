@@ -112,9 +112,9 @@ class Partner extends Model
     public function getClientsFromBoxFromPartner($box_id): array
     {
         $sql = "
-        SELECT omnesbox.box_id, box_title, box_content, box_price, purchase.purchase_date, possession.user_email FROM omnesbox
+        SELECT omnesbox.box_id, box_title, box_content, box_price, purchase.purchase_date, used.user_email FROM omnesbox
         JOIN purchase ON omnesbox.box_id = purchase.box_id
-        JOIN possession ON purchase.purchase_id = possession.possession_id
+        JOIN used ON used.used_id = purchase.purchase_id
         WHERE chosen_partner_email = :partner_email AND omnesbox.box_id = :box_id
         ";
         $query = $this->pdo->prepare($sql);
