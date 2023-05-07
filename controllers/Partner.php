@@ -2,6 +2,8 @@
 
 namespace Controllers;
 
+use Http;
+
 class Partner extends Controller 
 {
     protected $modelName = \Models\Partner::class;
@@ -76,6 +78,9 @@ class Partner extends Controller
             return 'error';
         }
         $boxs = $this->model->getBoxesFromActivityFromSite($activity_id);
+        if(!$boxs){
+            \Http::redirect('index.php?controller=partner&task=index&section=activities&error_message=');
+        }
         $boxsFromPartner = $this->model->getBoxsFromPartner();
         $this->isBoxSelectedForPartner($boxs, $boxsFromPartner);
         $contentSection = \Renderer::extractRender('view/partner/boxsavailable.html.php', compact('boxs'));
