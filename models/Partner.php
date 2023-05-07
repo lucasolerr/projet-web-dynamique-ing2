@@ -27,7 +27,33 @@ class Partner extends Model {
         return $items;
     }
 
-    public function getAllActivities() : array
+    public function getActivitiesFromSite() : array
+    {
+        $sql = "
+        SELECT * FROM activity
+        ";
+        $query = $this->pdo->prepare($sql);
+        $query->execute();
+        $activities = $query->fetchAll();
+
+        return $activities;
+    }
+
+    public function getBoxesFromActivityFromSite($activity_id) : array
+    {
+        $sql = "
+        SELECT * FROM activity
+        JOIN omnesbox on activity.activity_id = omnesbox.activity_id
+        WHERE activity.activity_id = :activity_id
+        ";
+        $query = $this->pdo->prepare($sql);
+        $query->execute(['activity_id' => $activity_id]);
+        $activities = $query->fetchAll();
+
+        return $activities;
+    }
+
+    public function getAllActivitiesFromPartner() : array
     {
         $sql = "
         SELECT activity.activity_id, activity_title, activity_content FROM {$this->table}
@@ -52,7 +78,7 @@ class Partner extends Model {
         return $accountInfos;
     }
 
-    public function getBoxs() : array
+    public function getBoxsFromPartner() : array
     {
         $sql = "
         SELECT box_id, box_title, box_content, box_price FROM {$this->table}
@@ -67,7 +93,7 @@ class Partner extends Model {
         return $boxs;
     }
 
-    public function getClients() : array
+    public function getClientsFromPartner() : array
     {
         $sql = "
         SELECT omnesbox.box_id, box_title, box_content, box_price, purchase.purchase_date, possession.user_email FROM omnesbox
