@@ -17,6 +17,21 @@ class Partner extends Model
         return $query->fetch();
     }
 
+    public function getNumberOfWaitingClients(): int
+    {
+        $sql = "
+        SELECT possession.user_email, possession_date, omnesbox.box_id, box_title, box_price, possession.possession_id
+        FROM possession
+        JOIN purchase ON purchase_id = possession_id
+        JOIN omnesbox on omnesbox.box_id = purchase.box_id
+        WHERE chosen_partner_email = :partner_email";
+        $query = $this->pdo->prepare($sql);
+        $query->execute(['partner_email' => $this->email]);
+        $numClients = $query->rowCount();
+        return $numClients;
+
+    }
+
     public function findAll(?string $order = ""): array
     {
         $sql = "SELECT * FROM {$this->table} WHERE account_type = 'partner'";
@@ -106,6 +121,34 @@ class Partner extends Model
         $query->execute(['partner_email' => $this->email, 'box_id' => $box_id]);
         $clients = $query->fetchAll();
         return $clients;
+    }
+
+    public function getClientsToValidate(): array
+    {
+        $sql = "
+        SELECT possession.user_email, possession_date, omnesbox.box_id, box_title, box_price, possession.possession_id FROM possession
+        JOIN purchase ON purchase_id = possession_id
+        JOIN omnesbox on omnesbox.box_id = purchase.box_id
+        WHERE chosen_partner_email = :partner_email";
+        $query = $this->pdo->prepare($sql);
+        $query->execute(['partner_email' => $this->email]);
+        $clients = $query->fetchAll();
+        return $clients;
+    }
+
+    public function validateUsedOfClient($id, $client_email)
+    {
+        $this->add(
+            'used',
+            [
+                'used_id' => $id,
+                'user_email' => $client_email,
+                'chosen_partner_email' => $this->email,
+                'used_date' => date("Y-m-d")
+            ]);
+        $sql = "DELETE FROM possession WHERE possession_id = :id AND chosen_partner_email = :partner_email AND user_email = :client_email";
+        $query = $this->pdo->prepare($sql);
+        $query->execute(['id' => $id, 'partner_email' => $this->email, 'client_email' => $client_email]);
     }
 
     public function isActivitySelectedForPartner($activity_id): bool

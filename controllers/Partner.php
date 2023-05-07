@@ -10,6 +10,7 @@ class Partner extends Controller
     {
         $pageTitle = "Espace Partenaires";
         $companyName = $this->model->getCompanyName();
+        $numClients = $this->model->getNumberOfWaitingClients();
         if (!empty($_GET['section'])) {
             $section = $_GET['section'];
         } else {
@@ -20,7 +21,7 @@ class Partner extends Controller
             return;
         }
         $contentSection = $this->$section();
-        \Renderer::render('/partner/index', compact('companyName', 'contentSection', 'pageTitle'));
+        \Renderer::render('/partner/index', compact('companyName', 'contentSection', 'pageTitle', 'numClients'));
     }
 
     public function activities(): string
@@ -80,6 +81,19 @@ class Partner extends Controller
         $box_id = filter_input(INPUT_GET, 'box_id', FILTER_VALIDATE_INT);
         $clients = $this->model->getClientsFromBoxFromPartner($box_id);
         $contentSection = \Renderer::extractRender('view/partner/clients.html.php', compact('clients'));
+        return $contentSection;
+    }
+
+    public function validation(): string
+    {
+        $selected = filter_input(INPUT_GET, 'selected', FILTER_VALIDATE_BOOLEAN);
+        $client_email = filter_input(INPUT_GET, 'client_email', FILTER_VALIDATE_EMAIL);
+        $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+        if (!is_null($selected) && !is_null($client_email) && !is_null($id)) {
+            $this->model->validateUsedOfClient($id, $client_email);
+        }
+        $clients = $this->model->getClientsToValidate();
+        $contentSection = \Renderer::extractRender('view/partner/validation.html.php', compact('clients'));
         return $contentSection;
     }
 

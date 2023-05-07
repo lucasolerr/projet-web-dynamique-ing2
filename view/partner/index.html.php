@@ -10,6 +10,21 @@
     </div>
 </header>
 
+<style>
+    .notification-badge {
+        display: inline-block;
+        background-color: red;
+        color: white;
+        border-radius: 50%;
+        font-size: 12px;
+        width: 20px;
+        height: 20px;
+        text-align: center;
+        line-height: 20px;
+        margin-left: 5px;
+    }
+</style>
+
 <div class="container-fluid">
     <div class="row">
         <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
@@ -25,6 +40,13 @@
                         <a class="nav-link" href="index.php?controller=partner&task=index&section=activities">
                             <i class="bi bi-broadcast"></i>
                             Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.php?controller=partner&task=index&section=validation">
+                            <i class="bi bi-cart"></i>
+                            Clients en attente
+                            <?php echo ($numClients > 0) ? '<span class="notification-badge">' . $numClients . '</span>' : ''; ?>
                         </a>
                     </li>
                 </ul>
