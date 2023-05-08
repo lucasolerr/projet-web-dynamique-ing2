@@ -1,9 +1,18 @@
 <h2>Clients</h2>
+<div class="d-flex justify-content-center align-items-center mt-3">
+    <?php 
+    $somme = 0;
+    foreach ($clients as $client) {
+        $somme += $client['box_price'];
+    } 
+    ?>
+    <h3>Total des revenus : <?= $somme ?> €</h3>
+</div>
 <div class="table-responsive">
     <table class="table table-striped table-sm">
         <thead>
             <tr>
-                <th scope="col">Id Box</th>
+                <th scope="col">Id</th>
                 <th scope="col">Titre</th>
                 <th scope="col">Description</th>
                 <th scope="col">Prix</th>
@@ -21,7 +30,7 @@
                     <td><?= $client['user_email'] ?></td>
                     <td><?= $client['purchase_date'] ?></td>
                 </tr>
-            <?php endforeach;?>
+            <?php endforeach; ?>
         </tbody>
     </table>
 </div>

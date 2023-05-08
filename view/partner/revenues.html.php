@@ -18,7 +18,7 @@
 <!-- Créer un conteneur pour le graphique -->
 <div class="container">
     <div class="d-flex justify-content-center align-items-center mt-3">
-        <h3>Total des revenus : <?= $totalRevenues ?></h3>
+        <h3>Total des revenus : <?= $totalRevenues ?> €</h3>
     </div>
     <div class="chart-container">
         <canvas id="revenue-chart"></canvas>
