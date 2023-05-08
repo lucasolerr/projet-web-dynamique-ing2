@@ -30,6 +30,12 @@
                 </div>
             </main>
         </div>
-
+    </div>
+    <div>
+        <?php 
+        if($error){
+            echo $error;
+        }
+        ?>
     </div>
 </div>

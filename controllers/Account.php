@@ -9,7 +9,8 @@ class Account extends Controller
     public function login()
     {
         $pageTitle = "Se connecter";
-        
+        $error = '';
+
         if (isset($_POST['login'])) {
             $password = $_POST['password'];
             $email = $_POST['email'];
@@ -22,16 +23,31 @@ class Account extends Controller
                     $_SESSION['email'] = $email;
                     return $user; 
                 } else {
-                    echo 'Erreur mail ou mot de passe';
+                    $error = '<script>alert("Erreur mail ou mot de passe")</script>';
                 }
             }
         }
-        \Renderer::render('/account/login', compact('pageTitle'));
+        \Renderer::render('/account/login', compact('pageTitle','error'));
+    }
+
+    public function isRegister($email, $first_name, $last_name, $password, $confirm_password){
+
+        if (!empty($email) && !empty($first_name) && !empty($last_name) && !empty($password) && ($password == $confirm_password)) {
+
+            if ($this->model->userExists($email)) {
+                return false;
+            }else{
+                return true;
+            }
+        }else{
+            return false;
+        }
     }
 
     public function register()
     {
         $pageTitle = "S'enregistrer";
+        $error = '';
 
         if (isset($_POST['register'])) {
             $password = $_POST['password'];
@@ -41,22 +57,18 @@ class Account extends Controller
             $last_name = $_POST['last_name'];
             $account_type = 'user';
 
-            if (!empty($email) && !empty($first_name) && !empty($last_name) && !empty($password) && ($password == $confirm_password)) {
-
-                if ($this->model->userExists($email)) {
-                    echo "Cette adresse mail est déjà utilisé.";
-                    exit;
-                }
+            if($this->isRegister($email, $first_name, $last_name, $password, $confirm_password)){
                 $result = $this->model->addUser($password, $email, $first_name, $last_name, $account_type);
-                if ($result) {
-                    \Renderer::render('/account/login', compact('pageTitle'));
-                    return;
-                } else {
-                    echo 'Erreur register';
-                }
+                \Http::redirect("/projet-web-dynamique-3g/index.php?controller=account&task=login");
+                exit();
+            }else{
+                $error = '<script>alert("Veuillez remplir tous les champs correctement")</script>';
             }
-            echo 'Veuillez remplir tous les champs correctement';
-        }
-        \Renderer::render('/account/register', compact('pageTitle'));
+    }
+    \Renderer::render('/account/register', compact('pageTitle', 'error'));
     }
 }
+
+
+
+
