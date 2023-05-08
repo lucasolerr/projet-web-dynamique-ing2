@@ -24,6 +24,7 @@ class Partner extends Model
         FROM possession
         JOIN purchase ON purchase_id = possession_id
         JOIN omnesbox on omnesbox.box_id = purchase.box_id
+        JOIN box_offer on box_offer.box_id = omnesbox.box_id
         WHERE chosen_partner_email = :partner_email";
         $query = $this->pdo->prepare($sql);
         $query->execute(['partner_email' => $this->email]);
@@ -115,6 +116,7 @@ class Partner extends Model
         SELECT omnesbox.box_id, box_title, box_content, box_price, purchase.purchase_date, used.user_email FROM omnesbox
         JOIN purchase ON omnesbox.box_id = purchase.box_id
         JOIN used ON used.used_id = purchase.purchase_id
+        JOIN box_offer on box_offer.box_id = omnesbox.box_id
         WHERE chosen_partner_email = :partner_email AND omnesbox.box_id = :box_id
         ";
         $query = $this->pdo->prepare($sql);
@@ -129,6 +131,7 @@ class Partner extends Model
         SELECT possession.user_email, possession_date, omnesbox.box_id, box_title, box_price, possession.possession_id FROM possession
         JOIN purchase ON purchase_id = possession_id
         JOIN omnesbox on omnesbox.box_id = purchase.box_id
+        JOIN box_offer on box_offer.box_id = omnesbox.box_id
         WHERE chosen_partner_email = :partner_email";
         $query = $this->pdo->prepare($sql);
         $query->execute(['partner_email' => $this->email]);
@@ -142,6 +145,7 @@ class Partner extends Model
         SELECT used_date, box_price FROM purchase
         JOIN omnesbox on purchase.box_id = omnesbox.box_id
         JOIN used on used_id = purchase_id
+        JOIN box_offer on box_offer.box_id = omnesbox.box_id
         WHERE chosen_partner_email = :partner_email";
         $query = $this->pdo->prepare($sql);
         $query->execute(['partner_email' => $this->email]);
@@ -210,13 +214,15 @@ class Partner extends Model
         $query->execute(['activity_id' => $activity_id, 'partner_email' => $this->email]);
     }
 
-    public function addBoxForPartner($box_id)
+    public function addBoxForPartner($box_id, $box_content, $box_price)
     {
         $this->add(
             'box_offer',
             [
                 'partner_email' => $this->email,
                 'box_id' => $box_id,
+                'box_content' => $box_content,
+                'box_price' => $box_price
             ]
         );
     }

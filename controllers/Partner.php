@@ -51,10 +51,15 @@ class Partner extends Controller
         }
         $selected = filter_input(INPUT_GET, 'selected', FILTER_VALIDATE_BOOLEAN);
         $box_id = filter_input(INPUT_GET, 'box_id', FILTER_VALIDATE_INT);
-        if (!is_null($selected) && !is_null($box_id)) {
+        if (!empty($_GET['box_content'])) {
+            $box_content = $_GET['box_content'];
+        }
+        //Attention erreur quand les champs sont vides à corriger
+        $box_price = filter_input(INPUT_GET, 'box_price', FILTER_VALIDATE_FLOAT);
+        if (!is_null($selected) && !is_null($box_id) && !is_null($box_content) && !is_null($box_price)) {
             if ($this->model->isActivitySelectedForPartner($activity_id)) {
                 if ($selected === true) {
-                    $this->model->addBoxForPartner($box_id);
+                    $this->model->addBoxForPartner($box_id, $box_content, $box_price);
                 } else {
                     $this->model->deleteBoxForPartner($box_id);
                 }
@@ -137,6 +142,8 @@ class Partner extends Controller
         foreach ($boxs as &$box) {
             // Initialiser la variable isSelected à false
             $box['isSelected'] = false;
+            $box['box_content'] = '';
+            $box['box_price'] = '';
 
             // Parcourir le tableau $selectedboxs
             foreach ($boxsFromPartner as $boxFromPartner) {
@@ -144,6 +151,8 @@ class Partner extends Controller
                 if ($box['box_id'] === $boxFromPartner['box_id']) {
                     // Si l'activité est dans le tableau $selectedboxs, mettre la variable isSelected à true
                     $box['isSelected'] = true;
+                    $box['box_content'] = $boxFromPartner['box_content'];
+                    $box['box_price'] = $boxFromPartner['box_price'];
                     break;
                 }
             }
