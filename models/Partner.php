@@ -136,6 +136,19 @@ class Partner extends Model
         return $clients;
     }
 
+    public function getRevenueFromPartner(): array
+    {
+        $sql = "
+        SELECT used_date, box_price FROM purchase
+        JOIN omnesbox on purchase.box_id = omnesbox.box_id
+        JOIN used on used_id = purchase_id
+        WHERE chosen_partner_email = :partner_email";
+        $query = $this->pdo->prepare($sql);
+        $query->execute(['partner_email' => $this->email]);
+        $revenues = $query->fetchAll();
+        return $revenues;
+    }
+
     public function validateUsedOfClient($id, $client_email)
     {
         $this->add(

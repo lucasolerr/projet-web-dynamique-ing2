@@ -97,6 +97,23 @@ class Partner extends Controller
         return $contentSection;
     }
 
+    public function revenues(): string
+    {
+        $revenues = $this->model->getRevenueFromPartner();
+        $revenueData = [];
+        $dateLabels = [];
+
+        foreach ($revenues as $revenue) {
+            $revenueData[] = $revenue['box_price'];
+            $dateLabels[] = $revenue['used_date'];
+        }
+
+        $totalRevenues = array_sum($revenueData);
+
+        $contentSection = \Renderer::extractRender('view/partner/revenues.html.php', compact('revenueData', 'dateLabels', 'totalRevenues'));
+        return $contentSection;
+    }
+
     public function isActivitySelectedForPartner(&$activities, $activitiesFromPartner)
     {
         foreach ($activities as &$activity) {

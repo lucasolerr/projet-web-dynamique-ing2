@@ -37,6 +37,12 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="index.php?controller=partner&task=index&section=revenues">
+                            <i class="bi bi-cash-coin"></i>
+                            Revenus
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="index.php?controller=partner&task=index&section=activities">
                             <i class="bi bi-broadcast"></i>
                             Dashboard

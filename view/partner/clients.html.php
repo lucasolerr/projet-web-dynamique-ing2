@@ -18,8 +18,8 @@
                     <td><?= $client['box_title'] ?></td>
                     <td><?= $client['box_content'] ?></td>
                     <td><?= $client['box_price'] ?></td>
-                    <td><?= $client['purchase_date'] ?></td>
                     <td><?= $client['user_email'] ?></td>
+                    <td><?= $client['purchase_date'] ?></td>
                 </tr>
             <?php endforeach;?>
         </tbody>
