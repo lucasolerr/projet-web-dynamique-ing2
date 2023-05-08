@@ -25,40 +25,39 @@ class Account extends Controller
                     $_SESSION['email'] = $email;
                     $_SESSION['account_type'] = $user['account_type'];
 
-                    return $user; 
-                } else if ($user && $user['account_type'] == 'partner'){
+                    return $user;
+                } else if ($user && $user['account_type'] == 'partner') {
                     echo 'Vous etes connecté en tant que partner';
                     // Stocker l'ID de l'utilisateur dans la session
                     $_SESSION['email'] = $email;
                     $_SESSION['account_type'] = $user['account_type'];
-                    return $user; 
-                }
-                else if ($user && $user['account_type'] == 'admin'){
+                    return $user;
+                } else if ($user && $user['account_type'] == 'admin') {
                     echo 'Vous etes connecté en tant que admin';
                     // Stocker l'ID de l'utilisateur dans la session
                     $_SESSION['email'] = $email;
                     $_SESSION['account_type'] = $user['account_type'];
-                    return $user; 
-                }
-                else {
+                    return $user;
+                } else {
                     $error = '<script>alert("Erreur mail ou mot de passe")</script>';
                 }
             }
         }
-        \Renderer::render('/account/login', compact('pageTitle','error'));
+        \Renderer::render('/account/login', compact('pageTitle', 'error'));
     }
 
     // verifie si les champs sont remplis et que le compte n'existe pas
-    public function isRegister($email, $first_name, $last_name, $password, $confirm_password){
+    public function isRegister($email, $first_name, $last_name, $password, $confirm_password)
+    {
 
         if (!empty($email) && !empty($first_name) && !empty($last_name) && !empty($password) && ($password == $confirm_password)) {
 
             if ($this->model->userExists($email)) {
                 return false;
-            }else{
+            } else {
                 return true;
             }
-        }else{
+        } else {
             return false;
         }
     }
@@ -77,25 +76,23 @@ class Account extends Controller
             $last_name = $_POST['last_name'];
             $account_type = 'user';
 
-            if($this->isRegister($email, $first_name, $last_name, $password, $confirm_password)){
+            if ($this->isRegister($email, $first_name, $last_name, $password, $confirm_password)) {
                 $result = $this->model->addUser($password, $email, $first_name, $last_name, $account_type);
                 \Http::redirect("/projet-web-dynamique-3g/index.php?controller=account&task=login");
                 exit();
-            }else{
+            } else {
                 $error = '<script>alert("Veuillez remplir tous les champs correctement")</script>';
             }
-    }
-    \Renderer::render('/account/register', compact('pageTitle', 'error'));
+        }
+        \Renderer::render('/account/register', compact('pageTitle', 'error'));
     }
 
-    public function logout() {
-
+    public function logout()
+    {
+        // remove all session variables
+        session_unset();
         session_destroy();
         \Http::redirect("/projet-web-dynamique-3g/index.php?controller=account&task=login");
         exit;
     }
 }
-
-
-
-

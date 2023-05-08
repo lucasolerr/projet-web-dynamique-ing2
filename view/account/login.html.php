@@ -3,11 +3,11 @@
         background-image: url('view/BG.png');
     }
 </style>
-<div class="container-fluid">
+<div class="container-fluid ">
     <div class="row">
-        <div class=" mx-auto col-lg-6">
+        <div class=" mx-auto pt-5 col-lg-6">
             <main>
-                <div class="text-center">
+                <div class="text-center p-3 rounded-5 bg-white text-dark">
                     <h2>Se connecter</h2>
                     <form method="POST" action="">
                         <div class="form-floating mb-3 mt-3">
