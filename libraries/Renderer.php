@@ -7,7 +7,7 @@ class Renderer {
         ob_start();
         require('view' . $path . '.html.php');
         $pageContent = ob_get_clean();
-    
+
         require('view/layout.html.php');
     }
 
