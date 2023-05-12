@@ -9,21 +9,36 @@ class Box extends Controller
 
     public function afficherBox()
     {
-        $pageTitle = "Titre de la box";
-
-        if(!empty($_GET['box_id'])){
+        if (!empty($_GET['box_id'])) {
             $box_id = $_GET['box_id'];
-        }else {
+        } else {
             $box_id = 0;
         }
+        if (!empty($_GET['partner'])) {
+            $partner_email = $_GET['partner'];
+        } else {
+            $partner_email = NULL;
+        }
 
-        $box = $this->model->getBox($box_id);
-        $box_content = $box['box_content'];
-        $box_price = $box['box_price'];
+        $partners = $this->model->getPartnerFromBoxId($box_id);
 
-        $activity = $this->model->getActivity( $this->model->getPartnerEmail($box_id));
-        $activity_title = $activity['activity_title'];
-        $activity_content = $activity['activity_content'];
-        \Renderer::render('/box/infoBox', compact('pageTitle', 'activity_content', 'box_price', 'activity_title'));
+        if ($partner_email === NULL && $box_id != 0) {
+            $url = 'index.php?controller=box&task=afficherBox&box_id=' . $box_id . '&partner=' . $partners[0]['partner_email'];
+            \Http::redirect($url);
+        } else {
+            //redirect home page
+        }
+
+        $box = $this->model->getBoxFromIdAndPartner($box_id, $partner_email);
+
+        $reviews = $this->model->getReviewsFromBox($box_id);
+
+        $num_reviews = $this->model->getNumReviews($box_id);
+
+        $grade = $this->model->getRating($box_id);
+
+        $pageTitle = $box['box_title'];
+
+        \Renderer::render('/box/infoBox', compact('pageTitle', 'box', 'partners', 'reviews', 'num_reviews' , 'grade'));
     }
 }

@@ -1,6 +1,6 @@
 <style>
     body {
-        background-image: url('view/BG.png');
+        background-image: url('public/BG.png');
     }
 </style>
 <div class="container-fluid ">
