@@ -8,6 +8,10 @@ class Partner extends Account
 
     public function index()
     {
+        if(!$this->isLogin() or $this->model->account_type !== 'partner') {
+            //\Http::redirect("index.php?controller=index&task=index");
+            //exit;
+        }
         $pageTitle = "Espace Partenaires";
         $companyName = $this->model->getCompanyName();
         $numClients = $this->model->getNumberOfWaitingClients();

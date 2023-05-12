@@ -17,7 +17,7 @@ class Application
             echo "Erreur 404";
             return;
         }
-
+        session_start();
         $controllerName = "\Controllers\\" . $controllerName;
         $controller = new $controllerName();
         $controller->$task();

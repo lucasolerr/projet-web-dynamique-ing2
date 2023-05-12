@@ -6,6 +6,15 @@ class Account extends Controller
 {
     protected $modelName = \Models\Account::class;
 
+    public function isLogin(): bool
+    {
+        if(isset($_SESSION['email']) && isset($_SESSION['account_type'])){
+            $this->model->email = $_SESSION['email'];
+            $this->model->account_type = $_SESSION['account_type'];
+            return true;
+        }
+        return false;
+    }
 
     // se connecte à son compte et lui crée une session utilisateur
     public function login()
@@ -20,23 +29,22 @@ class Account extends Controller
             if (!empty($email) && !empty($password)) {
                 $user = $this->model->login($email, $password);
                 if ($user && $user['account_type'] == 'user') {
-                    echo 'Vous etes connecté en tant que user';
                     // Stocker l'ID de l'utilisateur dans la session
                     $_SESSION['email'] = $email;
                     $_SESSION['account_type'] = $user['account_type'];
-
+                    \Http::redirect('index.php?controller=' . $_SESSION['account_type'] . '&task=index');
                     return $user;
                 } else if ($user && $user['account_type'] == 'partner') {
-                    echo 'Vous etes connecté en tant que partner';
                     // Stocker l'ID de l'utilisateur dans la session
                     $_SESSION['email'] = $email;
                     $_SESSION['account_type'] = $user['account_type'];
+                    \Http::redirect('index.php?controller=' . $_SESSION['account_type'] . '&task=index');
                     return $user;
                 } else if ($user && $user['account_type'] == 'admin') {
-                    echo 'Vous etes connecté en tant que admin';
                     // Stocker l'ID de l'utilisateur dans la session
                     $_SESSION['email'] = $email;
                     $_SESSION['account_type'] = $user['account_type'];
+                    \Http::redirect('index.php?controller=' . $_SESSION['account_type'] . '&task=index');
                     return $user;
                 } else {
                     $error = '<script>alert("Erreur mail ou mot de passe")</script>';
@@ -92,6 +100,7 @@ class Account extends Controller
         // remove all session variables
         session_unset();
         session_destroy();
+        session_start();
         \Http::redirect("index.php?controller=account&task=login");
         exit;
     }

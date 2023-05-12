@@ -4,12 +4,8 @@ namespace Models;
 
 class Account extends Model
 {
-    protected $email_account;
-
-    public function __construct()
-    {
-        $this->email_account = (isset($_SESSION['email']) ? $_SESSION['email'] : "");
-    }
+    public $email;
+    public $account_type;
 
     public function addUser($password, $email, $first_name, $last_name, $account_type)
     {
