@@ -1,5 +1,5 @@
 <!-- Barre de navigation -->
-<div class="bg-purple text-white" style="background: linear-gradient(94.59deg, #4923B4 2.39%, #E878CF 97.66%);">
+<div id="1" class="bg-purple text-white" style="background: linear-gradient(94.59deg, #4923B4 2.39%, #E878CF 97.66%);">
     <nav class="navbar navbar-expand-lg">
         <div class="container">
             <a href="#" class="navbar-brand">
@@ -11,20 +11,20 @@
             <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link text-white active" aria-current="page" href="#">Accueil</a>
+                        <a class="nav-link text-white active" aria-current="page" href="#1">Accueil</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="#">Cartes Cadeaux</a>
+                        <a class="nav-link text-white" href="#2">Cartes Cadeaux</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="#">J'ai une Omnesbox</a>
+                        <a class="nav-link text-white" href="#3">J'ai une Omnesbox</a>
                     </li>
                 </ul>
             </div>
             <div class="right-area">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a href="#" class="nav-link text-white">
+                        <a href="index.php?controller=account&task=login" class="nav-link text-white">
                             <i class="bi bi-person"></i>
                             Login
                         </a>
@@ -80,7 +80,7 @@
 </div>
 <div class="container mt-5 mb-3">
     <div>
-        <h2>Nos cartes cadeaux</h2>
+        <h2 id="2">Nos cartes cadeaux</h2>
     </div>
     <div class="row">
         <div class="col">
