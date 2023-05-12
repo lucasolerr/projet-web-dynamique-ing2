@@ -6,13 +6,6 @@ class Account extends Controller
 {
     protected $modelName = \Models\Account::class;
 
-    public function isLogin(): bool
-    {
-        if(isset($_SESSION['email']) && isset($_SESSION['account_type'])){
-            return true;
-        }
-        return false;
-    }
 
     // se connecte à son compte et lui crée une session utilisateur
     public function login()
