@@ -95,7 +95,7 @@
 
     <div class="row row-cols-4 justify-content-start">
         <?php foreach ($all_boxs as $box) : ?>
-            <div class="col card-container <?= $box['activity'] ?>">
+            <div class="col card-container <?= $box['activity'] ?>" data-box-id="<?= $box['id'] ?>">
                 <div class="card p-3 mb-2" style="width: 20rem;">
                     <img class="card-img-top" src="/public/assets/index/card.png" alt="cover">
                     <div class="card-body">
@@ -141,9 +141,20 @@
             }
         });
     });
+
+    $(document).ready(function() {
+        $('.card-container').click(function() {
+            var box_id = $(this).data('box-id');
+            window.location.href = 'index.php?controller=box&task=afficherbox&box_id=' + box_id;
+        });
+    });
 </script>
 
 <style>
+    .card-container:hover {
+        cursor: pointer;
+    }
+
     .filter-button {
         background-color: #fff;
         color: #333;

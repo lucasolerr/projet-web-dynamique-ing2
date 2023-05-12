@@ -21,6 +21,7 @@ class Index extends Controller
 
             // Créer un tableau associatif contenant les informations de la boîte
             $box_info = array(
+                'id' => $box_id,
                 'title' => $box_title,
                 'activity' => $activity_title,
                 'price' => $price,
