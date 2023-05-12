@@ -2,11 +2,9 @@
 
 namespace Models;
 
-class Partner extends Model
+class Partner extends Account
 {
     protected $table = "account";
-    public $email = "luca.soler@edu.ece.fr";
-    //public $email = "antoine.grenouillet@edu.ece.fr";
 
     public function getCompanyName(): array
     {

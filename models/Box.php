@@ -104,4 +104,9 @@ class Box extends Model
         return $activity;
     }
 
+    public function updatePossessionWhenOffer($id, $password)
+    {
+        
+    }
+
 }

@@ -4,7 +4,8 @@ namespace Models;
 
 class Account extends Model
 {
-
+    public $email;
+    public $account_type;
 
     public function addUser($password, $email, $first_name, $last_name, $account_type)
     {

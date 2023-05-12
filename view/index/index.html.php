@@ -24,10 +24,17 @@
             <div class="right-area">
                 <ul class="navbar-nav">
                     <li class="nav-item">
+                    <?php if($isLogin): ?>
+                        <a href="index.php?controller=<?=$accountType;?>&task=index" class="nav-link text-white">
+                            <i class="bi bi-person"></i>
+                            Mon compte
+                        </a>
+                    <?php else:?>
                         <a href="index.php?controller=account&task=login" class="nav-link text-white">
                             <i class="bi bi-person"></i>
                             Login
                         </a>
+                    <?php endif; ?>
                     </li>
                     <li class="nav-item">
                         <a href="#" class="nav-link text-white">

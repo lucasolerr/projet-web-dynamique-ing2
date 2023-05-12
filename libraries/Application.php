@@ -4,9 +4,6 @@ class Application
 {
     public static function process()
     {
-
-        
-
         if(!empty($_GET['controller'])){
             $controllerName = ucfirst($_GET['controller']);
         } else {
@@ -20,7 +17,7 @@ class Application
             echo "Erreur 404";
             return;
         }
-
+        session_start();
         $controllerName = "\Controllers\\" . $controllerName;
         $controller = new $controllerName();
         $controller->$task();
