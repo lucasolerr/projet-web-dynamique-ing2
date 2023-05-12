@@ -2,7 +2,7 @@
 
 namespace Controllers;
 
-class Partner extends Controller
+class Partner extends Account
 {
     protected $modelName = \Models\Partner::class;
 

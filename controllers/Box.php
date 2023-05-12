@@ -39,6 +39,34 @@ class Box extends Controller
 
         $pageTitle = $box['box_title'];
 
-        \Renderer::render('/box/infoBox', compact('pageTitle', 'box', 'partners', 'reviews', 'num_reviews' , 'grade'));
+        \Renderer::render('/box/infoBox', compact('pageTitle', 'box', 'partners', 'reviews', 'num_reviews', 'grade'));
+    }
+
+    public function offrirBox()
+    {
+        $pageTitle = "J'ai une omnesbox";
+        \Renderer::render('/box/offrirBox', compact('pageTitle'));
+    }
+
+    public function formBoxOffer()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+            // Vérification de la présence des données dans le tableau $_POST
+            if (isset($_POST['id']) && isset($_POST['password']) && !empty($_POST['id']) && !empty($_POST['password'])) {
+
+                // Nettoyage des données entrantes
+                $id = htmlspecialchars(trim($_POST['id']));
+                $password = htmlspecialchars(trim($_POST['password']));
+
+                var_dump($id);
+                var_dump($password);
+
+                // Vérification de la validité des données
+                
+            } else {
+                echo 'Form incomplet';
+            }
+        }
     }
 }

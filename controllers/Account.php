@@ -6,6 +6,13 @@ class Account extends Controller
 {
     protected $modelName = \Models\Account::class;
 
+    public function isLogin(): bool
+    {
+        if(isset($_SESSION['email']) && isset($_SESSION['account_type'])){
+            return true;
+        }
+        return false;
+    }
 
     // se connecte à son compte et lui crée une session utilisateur
     public function login()
@@ -92,7 +99,7 @@ class Account extends Controller
         // remove all session variables
         session_unset();
         session_destroy();
-        \Http::redirect("/projet-web-dynamique-3g/index.php?controller=account&task=login");
+        \Http::redirect("index.php?controller=account&task=login");
         exit;
     }
 }

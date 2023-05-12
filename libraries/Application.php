@@ -4,9 +4,6 @@ class Application
 {
     public static function process()
     {
-
-        
-
         if(!empty($_GET['controller'])){
             $controllerName = ucfirst($_GET['controller']);
         } else {
