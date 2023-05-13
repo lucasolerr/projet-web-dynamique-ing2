@@ -119,8 +119,8 @@ class Box extends Model
     {
         $date = date('Y-m-d'); // Generate a date string in the format 'YYYY-MM-DD HH:MM:SS'
         $sql = "
-        INSERT INTO possession (possession_id, possession_date, user_email, chosen_partner_email)
-        VALUES (:id, :date, :email, NULL)";
+        INSERT INTO possession (possession_id, possession_date, user_email)
+        VALUES (:id, :date, :email)";
         $query = $this->pdo->prepare($sql);
         $query->execute(['id' => $id, 'email' => $user_email, 'date' => $date]);
         $sql = "DELETE FROM to_offer WHERE to_offer_id = :id";

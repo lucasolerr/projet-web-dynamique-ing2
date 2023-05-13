@@ -38,19 +38,19 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="index.php?controller=user&task=index&section=purchased">
-                            <i class="bi bi-broadcast"></i>
+                            <i class="bi bi-box-seam"></i>
                             Box achetées
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="index.php?controller=user&task=index&section=possessed">
-                            <i class="bi bi-broadcast"></i>
+                            <i class="bi bi-box2-heart"></i>
                             Box Possédées
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="index.php?controller=user&task=index&section=used">
-                            <i class="bi bi-broadcast"></i>
+                            <i class="bi bi-gift"></i>
                             Box Utilisées
                         </a>
                     </li>

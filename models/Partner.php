@@ -158,12 +158,11 @@ class Partner extends Account
             [
                 'used_id' => $id,
                 'user_email' => $client_email,
-                'chosen_partner_email' => $this->email,
                 'used_date' => date("Y-m-d")
             ]);
-        $sql = "DELETE FROM possession WHERE possession_id = :id AND chosen_partner_email = :partner_email AND user_email = :client_email";
+        $sql = "DELETE FROM possession WHERE possession_id = :id AND user_email = :client_email";
         $query = $this->pdo->prepare($sql);
-        $query->execute(['id' => $id, 'partner_email' => $this->email, 'client_email' => $client_email]);
+        $query->execute(['id' => $id, 'client_email' => $client_email]);
     }
 
     public function isActivitySelectedForPartner($activity_id): bool
