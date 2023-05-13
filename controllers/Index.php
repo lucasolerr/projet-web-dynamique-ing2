@@ -33,8 +33,9 @@ class Index extends Controller
             $all_boxs[] = $box_info;
             $activities = $this->model->getActivities();
         }
+        $hasBoxSection = \Renderer::extractRender('view/box/offrirBox.html.php');
         $isLogin = \Http::isLogin();
         $accountType = (isset($_SESSION['account_type']) ? $_SESSION['account_type'] : '');
-        \Renderer::render('/index/index', compact('pageTitle', 'all_boxs', 'activities', 'isLogin', 'accountType'));
+        \Renderer::render('/index/index', compact('pageTitle', 'all_boxs', 'activities', 'isLogin', 'accountType', 'hasBoxSection'));
     }
 }
