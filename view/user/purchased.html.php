@@ -6,6 +6,8 @@
                 <th scope="col">Id</th>
                 <th scope="col">Titre</th>
                 <th scope="col">Date</th>
+                <th scope="col">Prix</th>
+                <th scope="col">Partenaire</th>
             </tr>
         </thead>
         <tbody>
@@ -14,6 +16,8 @@
                     <td><?= $purchase['box_id'] ?></td>
                     <td><?= $purchase['box_title'] ?></td>
                     <td><?= $purchase['purchase_date'] ?></td>
+                    <td><?= $purchase['box_price'] ?></td>
+                    <td><?= $purchase['partner_email'] ?></td>
                 </tr>
             <?php endforeach; ?>
         </tbody>

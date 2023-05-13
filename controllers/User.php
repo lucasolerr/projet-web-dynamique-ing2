@@ -44,4 +44,54 @@ class User extends Account
         $contentSection = \Renderer::extractRender('view/user/purchased.html.php', compact('purchased'));
         return $contentSection;
     }
+
+    public function used(): string
+    {
+        $selected = filter_input(INPUT_GET, 'selected', FILTER_VALIDATE_BOOLEAN);
+        $used_id = filter_input(INPUT_GET, 'used_id', FILTER_VALIDATE_INT);
+        $grade = filter_input(INPUT_GET, 'grade', FILTER_VALIDATE_INT);
+        if (!is_null($selected) && !is_null($used_id) && !is_null($grade)) {
+            if (!empty($_GET['comment'])) {
+                $comment = $_GET['comment'];
+            } else {
+                return 'remplissez le commentaire';
+            }
+            if ($selected === true) {
+                $this->model->deleteGradeCommentFromBox($used_id);
+                $this->model->addGradeCommentToBox($used_id,$grade, $comment);
+            }
+        }
+        $used = $this->model->getUsedBoxs();
+        $contentSection = \Renderer::extractRender('view/user/used.html.php', compact('used'));
+        return $contentSection;
+    }
+
+    public function offered(): string
+    {
+        $offered = $this->model->getOfferedBoxs();
+        $contentSection = \Renderer::extractRender('view/user/offered.html.php', compact('offered'));
+        return $contentSection;
+    }
+
+    public function possessed(): string
+    {
+        $selected = filter_input(INPUT_GET, 'selected', FILTER_VALIDATE_BOOLEAN);
+        $possession_id = filter_input(INPUT_GET, 'possession_id', FILTER_VALIDATE_INT);
+        $password = filter_input(INPUT_GET, 'password', FILTER_VALIDATE_INT);
+        if (!is_null($selected) && !is_null($possession_id) && !is_null($password)) {
+            if (!empty($_GET['password'])) {
+                $password = $_GET['password'];
+            } else {
+                return 'remplissez le mdp';
+            }
+            if ($selected === true) {
+                $this->model->addBoxToOffer($possession_id,$password);
+            } else {
+                //$this->model->deleteBoxToOffer($possession_id);
+            }
+        }
+        $possessed = $this->model->getPossessedBoxs();
+        $contentSection = \Renderer::extractRender('view/user/possessed.html.php', compact('possessed'));
+        return $contentSection;
+    }
 }

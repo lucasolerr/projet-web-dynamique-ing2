@@ -59,9 +59,17 @@ class Box extends Controller
                 $id = htmlspecialchars(trim($_POST['id']));
                 $password = htmlspecialchars(trim($_POST['password']));
 
-                var_dump($id);
-                var_dump($password);
+                $isCorrect = $this->model->verifyBoxOfferIdPassword($id, $password);
 
+                if(\Http::isLogin()){
+                    if($isCorrect['COUNT(*)'] > 0){
+                        $this->model->updatePossessionWhenOffer($id, $_SESSION['email']);
+                    } else {
+                        echo 'Aucun couple correspondant';
+                    }
+                } else {
+                    echo 'Connectez vous !'; 
+                }
                 // Vérification de la validité des données
                 
             } else {

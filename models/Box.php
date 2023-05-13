@@ -104,9 +104,27 @@ class Box extends Model
         return $activity;
     }
 
-    public function updatePossessionWhenOffer($id, $password)
+    public function verifyBoxOfferIdPassword($id, $password)
     {
-        
+        $sql = "
+        SELECT COUNT(*) FROM to_offer 
+        WHERE to_offer_id = :id AND to_offer_password = :password";
+        $query = $this->pdo->prepare($sql);
+        $query->execute(['id' => $id, 'password' => $password]);
+        $verify = $query->fetch();
+        return $verify;
     }
 
+    public function updatePossessionWhenOffer($id, $user_email)
+    {
+        $date = date('Y-m-d'); // Generate a date string in the format 'YYYY-MM-DD HH:MM:SS'
+        $sql = "
+        INSERT INTO possession (possession_id, possession_date, user_email)
+        VALUES (:id, :date, :email)";
+        $query = $this->pdo->prepare($sql);
+        $query->execute(['id' => $id, 'email' => $user_email, 'date' => $date]);
+        $sql = "DELETE FROM to_offer WHERE to_offer_id = :id";
+        $query = $this->pdo->prepare($sql);
+        $query->execute(['id' => $id]);
+    }
 }
