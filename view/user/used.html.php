@@ -22,7 +22,7 @@
                     <td><?= $use['chosen_partner_email'] ?></td>
                     <td><?= $use['box_price'] ?></td>
                     <?php if (is_null($use['grade']) && is_null($use['comment'])) : ?>
-                        <td><input type="number" name="grade" class="used-grade"></td>
+                        <td><input type="number" name="grade" class="used-grade"  min="0" max="5" required></td>
                         <td><input type="text" name="comment" class="used-comment"></td>
                         <td><input type="checkbox" data-used-id="<?= $use['used_id'] ?>" name="checkbox" class="used-checkbox"></td>
                     <?php else : ?>

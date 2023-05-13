@@ -48,7 +48,7 @@ class User extends Account
     public function used(): string
     {
         $selected = filter_input(INPUT_GET, 'selected', FILTER_VALIDATE_BOOLEAN);
-        $used_id = filter_input(INPUT_GET, 'possession_id', FILTER_VALIDATE_INT);
+        $used_id = filter_input(INPUT_GET, 'used_id', FILTER_VALIDATE_INT);
         $grade = filter_input(INPUT_GET, 'grade', FILTER_VALIDATE_INT);
         if (!is_null($selected) && !is_null($used_id) && !is_null($grade)) {
             if (!empty($_GET['comment'])) {
