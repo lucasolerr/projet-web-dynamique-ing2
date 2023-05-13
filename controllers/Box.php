@@ -64,6 +64,7 @@ class Box extends Controller
                 if(\Http::isLogin()){
                     if($isCorrect['COUNT(*)'] > 0){
                         $this->model->updatePossessionWhenOffer($id, $_SESSION['email']);
+                        echo 'Vous avez une nouvelle box disponible';
                     } else {
                         echo 'Aucun couple correspondant';
                     }

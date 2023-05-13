@@ -24,17 +24,17 @@
             <div class="right-area">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                    <?php if($isLogin): ?>
-                        <a href="index.php?controller=<?=$accountType;?>&task=index" class="nav-link text-white">
-                            <i class="bi bi-person"></i>
-                            Mon compte
-                        </a>
-                    <?php else:?>
-                        <a href="index.php?controller=account&task=login" class="nav-link text-white">
-                            <i class="bi bi-person"></i>
-                            Login
-                        </a>
-                    <?php endif; ?>
+                        <?php if ($isLogin) : ?>
+                            <a href="index.php?controller=<?= $accountType; ?>&task=index" class="nav-link text-white">
+                                <i class="bi bi-person"></i>
+                                Mon compte
+                            </a>
+                        <?php else : ?>
+                            <a href="index.php?controller=account&task=login" class="nav-link text-white">
+                                <i class="bi bi-person"></i>
+                                Login
+                            </a>
+                        <?php endif; ?>
                     </li>
                     <li class="nav-item">
                         <a href="#" class="nav-link text-white">
@@ -101,7 +101,7 @@
     </div>
 
     <div class="row row-cols-4 justify-content-start">
-        <?php foreach ($all_boxs as $box) : ?>
+        <?php foreach ($all_boxs as $box) : if($box['price'] != NULL): ?>
             <div class="col card-container <?= $box['activity'] ?>" data-box-id="<?= $box['id'] ?>">
                 <div class="card p-3 mb-2" style="width: 20rem;">
                     <img class="card-img-top" src="/public/assets/index/card.png" alt="cover">
@@ -126,13 +126,16 @@
                             <h6 class="review-count"><?= $box['num_reviews'] ?> Avis</h6>
                         </div>
                         <div class="d-flex justify-content-between mt-3">
-                            <h5><?= $box['price'] ?>€</h5>
+                            <h5><?= number_format($box['price'], 2) ?>€</h5>
                             <a href="#" class="btn btn-primary">Add to cart</a>
                         </div>
                     </div>
                 </div>
             </div>
-        <?php endforeach; ?>
+        <?php endif; endforeach; ?>
+    </div>
+    <div id="3" class="container">
+        <?= $hasBoxSection ?>
     </div>
 </div>
 
