@@ -44,4 +44,18 @@ class User extends Account
         $contentSection = \Renderer::extractRender('view/user/purchased.html.php', compact('purchased'));
         return $contentSection;
     }
+
+    public function used(): string
+    {
+        $used = $this->model->getUsedBoxs();
+        $contentSection = \Renderer::extractRender('view/user/used.html.php', compact('used'));
+        return $contentSection;
+    }
+
+    public function possessed(): string
+    {
+        $possessed = $this->model->getPossessedBoxs();
+        $contentSection = \Renderer::extractRender('view/user/possessed.html.php', compact('possessed'));
+        return $contentSection;
+    }
 }

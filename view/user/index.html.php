@@ -42,6 +42,18 @@
                             Box achetées
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.php?controller=user&task=index&section=possessed">
+                            <i class="bi bi-broadcast"></i>
+                            Box Possédées
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.php?controller=user&task=index&section=used">
+                            <i class="bi bi-broadcast"></i>
+                            Box Utilisées
+                        </a>
+                    </li>
                 </ul>
         </nav>
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
