@@ -100,7 +100,7 @@
         </div>
     </div>
 
-    <div class="row row-cols-4 justify-content-start">
+    <div class="row row-cols-auto justify-content-start">
         <?php foreach ($all_boxs as $box) : if($box['price'] != NULL): ?>
             <div class="col card-container <?= $box['activity'] ?>" data-box-id="<?= $box['id'] ?>">
                 <div class="card p-3 mb-2" style="width: 20rem;">
