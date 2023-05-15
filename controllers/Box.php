@@ -61,18 +61,18 @@ class Box extends Controller
 
                 $isCorrect = $this->model->verifyBoxOfferIdPassword($id, $password);
 
-                if(\Http::isLogin()){
-                    if($isCorrect['COUNT(*)'] > 0){
+                if (\Http::isLogin()) {
+                    if ($isCorrect['COUNT(*)'] > 0) {
                         $this->model->updatePossessionWhenOffer($id, $_SESSION['email']);
-                        echo 'Vous avez une nouvelle box disponible';
+                        echo '<script>alert("Une nouvelle box vous attend !.");window.location.href = "index.php?controller=user&task=index";</script>';
                     } else {
                         echo 'Aucun couple correspondant';
                     }
                 } else {
-                    echo 'Connectez vous !'; 
+                    echo '<script>alert("Vous devez être connecté pour bénéficier d\'une box.");window.location.href = "index.php?controller=Account&task=login";</script>';
                 }
                 // Vérification de la validité des données
-                
+
             } else {
                 echo 'Form incomplet';
             }
