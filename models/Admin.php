@@ -45,10 +45,10 @@ class Admin extends Account
             return null;
     }
 
-    public function addPartner($email){
+    public function addPartner($email,$name){
         $password = "password";
         if(!$this->userExists($email))
-            return $this->addUser($password,$email,"","","partner");
+            return $this->addUser($password,$email,"",$name,"partner");
         else 
             false;
     }
@@ -64,6 +64,22 @@ class Admin extends Account
         $query->execute();
         $box = $query->fetchAll();
 
+        return $box;
+    }
+
+    public function getBoxFromActivity($activity_id) :array{
+        $sql = "SELECT box_id, box_tilte FROM (activity JOIN omnesbox ON activity.activity_id = omnesbox.activity_id) WHERE activity_id = {$activity_id}";
+        $query = $this->pdo->prepare($sql);
+        $query->execute();
+        $box = $query->fetchAll();
+        return $box;
+    }
+
+    public function getBoxFromPartner($partner_email) :array{
+        $sql = "SELECT box_id, box_tilte FROM (account JOIN box_offer ON account.email = box_offer.partner_email) WHERE email = {$partner_email}";
+        $query = $this->pdo->prepare($sql);
+        $query->execute();
+        $box = $query->fetchAll();
         return $box;
     }
 
@@ -85,6 +101,14 @@ class Admin extends Account
         $query->execute();
         $box = $query->fetchAll();
 
+        return $box;
+    }
+
+    public function getActivityFromPartner($partner_email) :array{
+        $sql = "SELECT activity_id, activity_title FROM (account JOIN activity_offer ON account.email = activity_offer.partner_email) WHERE email = {$partner_email}";
+        $query = $this->pdo->prepare($sql);
+        $query->execute();
+        $box = $query->fetchAll();
         return $box;
     }
 

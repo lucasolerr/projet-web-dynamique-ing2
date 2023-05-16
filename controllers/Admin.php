@@ -18,54 +18,45 @@ class Admin extends Controller
             echo 'Erreur 404';
             return;
         }
+        $activitiesForAdd = $this->model->getAllActivity();
         $contentSection = $this->$section();
-        var_dump($contentSection);
-        \Renderer::render('/admin/index', compact('contentSection', 'pageTitle'));
+        \Renderer::render('/admin/index', compact('contentSection', 'pageTitle', 'activitiesForAdd'));
     }
 
     public function activities(): string
     {
         $activities = $this->model->getAllActivity();
+        foreach ($activities as $activity) :
+            $activity["boxs"] = $this->model->getBoxFromActivity($activity["activity_id"]);
+        endforeach;
+
         $contentSection = \Renderer::extractRender('view/admin/activities.html.php', compact('activities'));
+        return $contentSection;
+    }
+
+    public function partners(): string
+    {
+        $partners = $this->model->getAllPartners();
+        foreach ($partners as $partner) :
+            $partner["boxs"] = $this->model->getBoxFromPartner($partner["email"]);
+            $partner["activities"] = $this->model->getActivityFromPartner($partner["email"]);
+        endforeach;
+
+        $contentSection = \Renderer::extractRender('view/admin/partners.html.php', compact('partners'));
         return $contentSection;
     }
 
     public function boxs(): string
     {
-        if (!empty($_GET['activity_id'])) {
-            $activity_id = $_GET['activity_id'];
-        } else {
-            return 'error';
-        }
-        #$selected = filter_input(INPUT_GET, 'selected', FILTER_VALIDATE_BOOLEAN);
-        #$box_id = filter_input(INPUT_GET, 'box_id', FILTER_VALIDATE_INT);
-        if (!empty($_GET['box_content'])) {
-            $box_content = $_GET['box_content'];
-        }
-        //Attention erreur quand les champs sont vides à corriger
-        $box_price = filter_input(INPUT_GET, 'box_price', FILTER_VALIDATE_FLOAT);
-        #if (!is_null($selected) && !is_null($box_id) && !is_null($box_content) && !is_null($box_price)) {
-        #    if ($this->model->isActivitySelectedForPartner($activity_id)) {
-        #        if ($selected === true) {
-        #            $this->model->addBoxForPartner($box_id, $box_content, $box_price);
-        #        } else {
-        #            $this->model->deleteBoxForPartner($box_id);
-        #        }
-        #    } else {
-        #        echo '<script>alert("Activitée non sélectionnée")</script>';
-        #    }
-        #}
-        $boxs = $this->model->getBoxesFromActivityFromSite($activity_id);
-        $boxsFromPartner = $this->model->getBoxsFromPartner();
-        $this->isBoxSelectedForPartner($boxs, $boxsFromPartner);
-        $contentSection = \Renderer::extractRender('view/partner/boxs.html.php', compact('boxs'));
+        $boxs = $this->model->getAllBox();
+        $contentSection = \Renderer::extractRender('view/admin/boxs.html.php', compact('boxs'));
         return $contentSection;
     }
 
     public function account(): string
     {
         $accountInfos = $this->model->getInformationAccount();
-        $contentSection = \Renderer::extractRender('view/partner/account.html.php', compact('accountInfos'));
+        $contentSection = \Renderer::extractRender('view/admin/account.html.php', compact('accountInfos'));
         return $contentSection;
     }
 
@@ -77,73 +68,33 @@ class Admin extends Controller
         return $contentSection;
     }
 
-    public function validation(): string
+    public function add_box(): string
     {
-        $selected = filter_input(INPUT_GET, 'selected', FILTER_VALIDATE_BOOLEAN);
-        $client_email = filter_input(INPUT_GET, 'client_email', FILTER_VALIDATE_EMAIL);
-        $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
-        if (!is_null($selected) && !is_null($client_email) && !is_null($id)) {
-            $this->model->validateUsedOfClient($id, $client_email);
-        }
-        $clients = $this->model->getClientsToValidate();
-        $contentSection = \Renderer::extractRender('view/partner/validation.html.php', compact('clients'));
+        $box_title = filter_input(INPUT_POST, 'box_tilte', FILTER_VALIDATE_REGEXP);
+        $box_content = filter_input(INPUT_POST, 'box_content', FILTER_VALIDATE_REGEXP);
+        $box_price = filter_input(INPUT_POST, 'box_price', FILTER_VALIDATE_FLOAT);
+        $box_activity = filter_input(INPUT_POST, 'box_activity', FILTER_VALIDATE_INT);
+        $this->model->addBox($box_title, $box_content, $box_price, $box_activity);
+        $contentSection = "<h2>Ajout effectué</h2>";
         return $contentSection;
     }
 
-    public function revenues(): string
+    public function add_activity(): string
     {
-        $revenues = $this->model->getRevenueFromPartner();
-        $revenueData = [];
-        $dateLabels = [];
-
-        foreach ($revenues as $revenue) {
-            $revenueData[] = $revenue['box_price'];
-            $dateLabels[] = $revenue['used_date'];
-        }
-
-        $totalRevenues = array_sum($revenueData);
-
-        $contentSection = \Renderer::extractRender('view/partner/revenues.html.php', compact('revenueData', 'dateLabels', 'totalRevenues'));
+        $activity_title = filter_input(INPUT_POST, 'activity_title', FILTER_VALIDATE_REGEXP);
+        $activity_content = filter_input(INPUT_POST, 'activity_content', FILTER_VALIDATE_REGEXP);
+        $this->model->addActivity($activity_title, $activity_content);
+        $contentSection = "<h2>Ajout effectué</h2>";
         return $contentSection;
     }
 
-    public function isActivitySelectedForPartner(&$activities, $activitiesFromPartner)
+    public function add_partner(): string
     {
-        foreach ($activities as &$activity) {
-            // Initialiser la variable isSelected à false
-            $activity['isSelected'] = false;
-
-            // Parcourir le tableau $selectedActivities
-            foreach ($activitiesFromPartner as $activityFromPartner) {
-                // Vérifier si l'activité est dans le tableau $selectedActivities
-                if ($activity['activity_id'] === $activityFromPartner['activity_id']) {
-                    // Si l'activité est dans le tableau $selectedActivities, mettre la variable isSelected à true
-                    $activity['isSelected'] = true;
-                    break;
-                }
-            }
-        }
-    }
-
-    public function isBoxSelectedForPartner(&$boxs, $boxsFromPartner)
-    {
-        foreach ($boxs as &$box) {
-            // Initialiser la variable isSelected à false
-            $box['isSelected'] = false;
-            $box['box_content'] = '';
-            $box['box_price'] = '';
-
-            // Parcourir le tableau $selectedboxs
-            foreach ($boxsFromPartner as $boxFromPartner) {
-                // Vérifier si l'activité est dans le tableau $selectedboxs
-                if ($box['box_id'] === $boxFromPartner['box_id']) {
-                    // Si l'activité est dans le tableau $selectedboxs, mettre la variable isSelected à true
-                    $box['isSelected'] = true;
-                    $box['box_content'] = $boxFromPartner['box_content'];
-                    $box['box_price'] = $boxFromPartner['box_price'];
-                    break;
-                }
-            }
-        }
+        $email = filter_input(INPUT_POST, 'partner_email', FILTER_VALIDATE_EMAIL);
+        $name = filter_input(INPUT_POST, 'partner_name', FILTER_VALIDATE_REGEXP);
+        if (!$this->model->addPartner($email, $name))
+            return "<h2>L'ajout a échoué</h2>";
+        else
+            return "<h2>Ajout effectué</h2>";
     }
 }
