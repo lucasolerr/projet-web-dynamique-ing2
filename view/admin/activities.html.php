@@ -10,11 +10,11 @@
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($activities as $activity) : ?>
+            <?php for ($i=0; $i < count($activities) ; $i++) { ?>
                 <tr>
-                    <td><?= $activity['activity_id'] ?></td>
-                    <td><?= $activity['activity_title'] ?></td>
-                    <td><?= $activity['activity_content'] ?></td>
+                    <td><?= $activities[$i]['activity_id'] ?></td>
+                    <td><?= $activities[$i]['activity_title'] ?></td>
+                    <td><?= $activities[$i]['activity_content'] ?></td>
                     <td>
                         <div class="dropdown">
                             <div class="dropdown-toggle" style="cursor: pointer;" data-bs-toggle="dropdown">
@@ -22,14 +22,14 @@
                             </div>
                             <ul class="dropdown-menu">
                                 <li><span class="dropdown-item-text">ID | titre</span></li>
-                                <?php foreach ($activity["boxs"] as $activity_box) : ?>
+                                <?php foreach ($activities_boxs[$i] as $activity_box) : ?>
                                     <li><span class="dropdown-item-text"><?= $activity_box['box_id'] ?> | <?= $activity_box['box_title'] ?></span></li>
                                 <?php endforeach; ?>
                             </ul>
                         </div>
                     </td>
                 </tr>
-            <?php endforeach; ?>
+            <?php } ?>
         </tbody>
     </table>
 </div>

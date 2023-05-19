@@ -11,7 +11,7 @@
         </ul>
     </div>
     <div id="add_partner">
-        <form action="/index.php?controller=Admin&task=add_partner" method="post">
+        <form action="/projet-web-dynamique-3g/index.php?controller=admin&task=index&section=add_partner" method="post">
             <div class="mb-3 mt-3">
                 <label for="partner_name" class="form-label">Nom :</label>
                 <input type="text" maxlength="50" required class="form-control" id="partner_name" placeholder="Entrez le nom du partenaire" name="partner_name">
@@ -24,7 +24,7 @@
         </form>
     </div>
     <div id="add_activity">
-        <form action="/index.php?controller=Admin&task=add_activity" method="post">
+        <form action="/projet-web-dynamique-3g/index.php?controller=admin&task=index&section=add_activity" method="post">
             <div class="mb-3 mt-3">
                 <label for="activity_title" class="form-label">Titre :</label>
                 <input type="text" maxlength="100" required class="form-control" id="activity_title" placeholder="Entrez le titre de l'activité" name="activity_title">
@@ -37,7 +37,7 @@
         </form>
     </div>
     <div id="add_box">
-        <form action="/index.php?controller=Admin&task=add_box" method="post">
+        <form action="/projet-web-dynamique-3g/index.php?controller=admin&task=index&section=add_box" method="post">
             <div class="mb-3 mt-3">
                 <label for="box_title" class="form-label">Titre :</label>
                 <input type="text" maxlength="100" required class="form-control" id="box_title" placeholder="Entrez le titre de la box" name="box_title">
@@ -62,7 +62,6 @@
         </form>
     </div>
 </div>
-
 
 <script>
     $(document).ready(function() {

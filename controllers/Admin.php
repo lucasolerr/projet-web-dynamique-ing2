@@ -26,30 +26,37 @@ class Admin extends Controller
     public function activities(): string
     {
         $activities = $this->model->getAllActivity();
+        $activities_boxs = array();
         foreach ($activities as $activity) :
-            $activity["boxs"] = $this->model->getBoxFromActivity($activity["activity_id"]);
+            array_push($activities_boxs,$this->model->getBoxFromActivity($activity["activity_id"]));
         endforeach;
 
-        $contentSection = \Renderer::extractRender('view/admin/activities.html.php', compact('activities'));
+        $contentSection = \Renderer::extractRender('view/admin/activities.html.php', compact('activities','activities_boxs'));
         return $contentSection;
     }
 
     public function partners(): string
     {
         $partners = $this->model->getAllPartners();
+        $partners_boxs = array();
+        $partners_activities = array();
         foreach ($partners as $partner) :
-            $partner["boxs"] = $this->model->getBoxFromPartner($partner["email"]);
-            $partner["activities"] = $this->model->getActivityFromPartner($partner["email"]);
+            array_push($partners_boxs,$this->model->getBoxFromPartner($partner["email"]));
+            array_push($partners_activities, $this->model->getActivityFromPartner($partner["email"]));
         endforeach;
 
-        $contentSection = \Renderer::extractRender('view/admin/partners.html.php', compact('partners'));
+        $contentSection = \Renderer::extractRender('view/admin/partners.html.php', compact('partners','partners_boxs','partners_activities'));
         return $contentSection;
     }
 
     public function boxs(): string
     {
         $boxs = $this->model->getAllBox();
-        $contentSection = \Renderer::extractRender('view/admin/boxs.html.php', compact('boxs'));
+        $boxs_activity = array();
+        foreach ($boxs as $box) :
+            array_push($boxs_activity,$this->model->getActivityFromBox($box['box_id']));
+        endforeach;
+        $contentSection = \Renderer::extractRender('view/admin/boxs.html.php', compact('boxs','boxs_activity'));
         return $contentSection;
     }
 
@@ -60,18 +67,18 @@ class Admin extends Controller
         return $contentSection;
     }
 
-    public function clients(): string
+    public function users(): string
     {
         $box_id = filter_input(INPUT_GET, 'box_id', FILTER_VALIDATE_INT);
-        $clients = $this->model->getClientsFromBoxFromPartner($box_id);
-        $contentSection = \Renderer::extractRender('view/partner/clients.html.php', compact('clients'));
+        $clients = $this->model->getAllUsers();
+        $contentSection = \Renderer::extractRender('view/admin/clients.html.php', compact('clients'));
         return $contentSection;
     }
 
     public function add_box(): string
     {
-        $box_title = filter_input(INPUT_POST, 'box_tilte', FILTER_VALIDATE_REGEXP);
-        $box_content = filter_input(INPUT_POST, 'box_content', FILTER_VALIDATE_REGEXP);
+        $box_title = filter_input(INPUT_POST, 'box_title', FILTER_SANITIZE_SPECIAL_CHARS);
+        $box_content = filter_input(INPUT_POST, 'box_content', FILTER_SANITIZE_SPECIAL_CHARS);
         $box_price = filter_input(INPUT_POST, 'box_price', FILTER_VALIDATE_FLOAT);
         $box_activity = filter_input(INPUT_POST, 'box_activity', FILTER_VALIDATE_INT);
         $this->model->addBox($box_title, $box_content, $box_price, $box_activity);
@@ -81,8 +88,8 @@ class Admin extends Controller
 
     public function add_activity(): string
     {
-        $activity_title = filter_input(INPUT_POST, 'activity_title', FILTER_VALIDATE_REGEXP);
-        $activity_content = filter_input(INPUT_POST, 'activity_content', FILTER_VALIDATE_REGEXP);
+        $activity_title = filter_input(INPUT_POST, 'activity_title', FILTER_SANITIZE_SPECIAL_CHARS);
+        $activity_content = filter_input(INPUT_POST, 'activity_content', FILTER_SANITIZE_SPECIAL_CHARS);
         $this->model->addActivity($activity_title, $activity_content);
         $contentSection = "<h2>Ajout effectué</h2>";
         return $contentSection;
@@ -91,7 +98,7 @@ class Admin extends Controller
     public function add_partner(): string
     {
         $email = filter_input(INPUT_POST, 'partner_email', FILTER_VALIDATE_EMAIL);
-        $name = filter_input(INPUT_POST, 'partner_name', FILTER_VALIDATE_REGEXP);
+        $name = filter_input(INPUT_POST, 'partner_name', FILTER_SANITIZE_SPECIAL_CHARS);
         if (!$this->model->addPartner($email, $name))
             return "<h2>L'ajout a échoué</h2>";
         else

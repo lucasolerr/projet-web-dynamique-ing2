@@ -39,13 +39,19 @@
                     <li class="nav-item">
                         <a class="nav-link" href="index.php?controller=admin&task=index&section=partners">
                             <i class="bi bi-cash-coin"></i>
-                            partners
+                            Partenaires
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="index.php?controller=admin&task=index&section=activities">
                             <i class="bi bi-broadcast"></i>
-                            Dashboard
+                            Activitées
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.php?controller=admin&task=index&section=boxs">
+                            <i class="bi bi-gift"></i>
+                            Omnesboxs
                         </a>
                     </li>
                     <li class="nav-item">

@@ -6,12 +6,7 @@ class Account extends Model
 {
     protected $table = "account";
     public $email;
-
-    public function __construct($email){
-        $this->pdo = \Database::getPdo();
-        $this->email = $email;
-    }
-
+    
     public function getInformationAccount(): array
     {
         $sql = "SELECT * FROM {$this->table} WHERE email = '{$this->email}'";

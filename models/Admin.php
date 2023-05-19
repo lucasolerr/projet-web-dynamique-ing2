@@ -7,8 +7,12 @@ class Admin extends Account
     public $email = "louis.renaud@edu.ece.fr";
 
     protected function getAccountInfo($email) :array{
-        $account = new Account($email);
-        return $account->getInformationAccount(); 
+        $sql = "SELECT * FROM {$this->table} WHERE email = '{$email}'";
+        $query = $this->pdo->prepare($sql);
+        $query->execute();
+        $accountInfos = $query->fetchAll();
+
+        return $accountInfos;
     }
 
     public function getAllUsers() :array{
@@ -59,7 +63,7 @@ class Admin extends Account
     }
 
     public function getAllBox() :array{
-        $sql = "SELECT * FROM omnesbox ORDER BY activity_id, box_price";
+        $sql = "SELECT * FROM omnesbox ORDER BY box_id";
         $query = $this->pdo->prepare($sql);
         $query->execute();
         $box = $query->fetchAll();
@@ -68,7 +72,7 @@ class Admin extends Account
     }
 
     public function getBoxFromActivity($activity_id) :array{
-        $sql = "SELECT box_id, box_tilte FROM (activity JOIN omnesbox ON activity.activity_id = omnesbox.activity_id) WHERE activity_id = {$activity_id}";
+        $sql = "SELECT omnesbox.box_id, omnesbox.box_title FROM (activity JOIN omnesbox ON activity.activity_id = omnesbox.activity_id) WHERE activity.activity_id = {$activity_id}";
         $query = $this->pdo->prepare($sql);
         $query->execute();
         $box = $query->fetchAll();
@@ -76,27 +80,22 @@ class Admin extends Account
     }
 
     public function getBoxFromPartner($partner_email) :array{
-        $sql = "SELECT box_id, box_tilte FROM (account JOIN box_offer ON account.email = box_offer.partner_email) WHERE email = {$partner_email}";
+        $sql = "SELECT omnesbox.box_id, omnesbox.box_title FROM ((account JOIN box_offer ON account.email LIKE box_offer.partner_email) JOIN omnesbox ON omnesbox.box_id = box_offer.box_id) WHERE account.email LIKE :email";
         $query = $this->pdo->prepare($sql);
-        $query->execute();
+        $query->execute(["email" => $partner_email]);
         $box = $query->fetchAll();
         return $box;
     }
 
     public function addBox($title,$content,$price,$activity_id){
-        $this->add(
-            'omnesbox',
-            [
-                "box_title" => $title,
-                "box_content" => $content,
-                "box_price" => $price,
-                "activity_id" => $activity_id,
-            ]
-        );
+        $query = "INSERT INTO omnesbox (box_title, box_content,box_price,activity_id) VALUES ('$title', '$content','$price','$activity_id')";
+        $stmt = $this->pdo->prepare($query);
+
+        return $stmt->execute();
     }
 
     public function getAllActivity() :array{
-        $sql = "SELECT * FROM omnesbox";
+        $sql = "SELECT * FROM activity";
         $query = $this->pdo->prepare($sql);
         $query->execute();
         $box = $query->fetchAll();
@@ -105,20 +104,25 @@ class Admin extends Account
     }
 
     public function getActivityFromPartner($partner_email) :array{
-        $sql = "SELECT activity_id, activity_title FROM (account JOIN activity_offer ON account.email = activity_offer.partner_email) WHERE email = {$partner_email}";
+        $sql = "SELECT activity.activity_id, activity.activity_title FROM ((account JOIN activity_offer ON account.email LIKE activity_offer.partner_email) JOIN activity ON activity.activity_id = activity_offer.activity_id) WHERE account.email LIKE :email";
         $query = $this->pdo->prepare($sql);
-        $query->execute();
+        $query->execute(["email" => $partner_email]);
         $box = $query->fetchAll();
         return $box;
     }
 
+    public function getActivityFromBox($box_id) :array{
+        $sql = "SELECT activity.activity_id, activity.activity_title FROM (activity JOIN omnesbox ON activity.activity_id = omnesbox.activity_id) WHERE omnesbox.box_id = {$box_id}";
+        $query = $this->pdo->prepare($sql);
+        $query->execute();
+        $activity = $query->fetchAll();
+        return $activity;
+    }
+
     public function addActivity($title,$content){
-        $this->add(
-            'activity',
-            [
-                "activity_title" => $title,
-                "activity_content" => $content,
-            ]
-        );
+        $query = "INSERT INTO activity (activity_title, activity_content) VALUES ('$title', '$content')";
+        $stmt = $this->pdo->prepare($query);
+
+        return $stmt->execute();
     }
 }
