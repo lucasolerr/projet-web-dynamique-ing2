@@ -78,10 +78,8 @@ class Admin extends Controller
     public function add_box(): string
     {
         $box_title = filter_input(INPUT_POST, 'box_title', FILTER_SANITIZE_SPECIAL_CHARS);
-        $box_content = filter_input(INPUT_POST, 'box_content', FILTER_SANITIZE_SPECIAL_CHARS);
-        $box_price = filter_input(INPUT_POST, 'box_price', FILTER_VALIDATE_FLOAT);
         $box_activity = filter_input(INPUT_POST, 'box_activity', FILTER_VALIDATE_INT);
-        $this->model->addBox($box_title, $box_content, $box_price, $box_activity);
+        $this->model->addBox($box_title, $box_activity);
         $contentSection = "<h2>Ajout effectué</h2>";
         return $contentSection;
     }
