@@ -4,6 +4,17 @@
     }
 </style>
 <div class="container-fluid ">
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link text-white active" aria-current="page" href="index.php?controller=index&task=index">Accueil</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
     <div class="row">
         <div class=" mx-auto pt-5 col-lg-6">
             <main>
@@ -32,8 +43,8 @@
         </div>
     </div>
     <div>
-        <?php 
-        if($error){
+        <?php
+        if ($error) {
             echo $error;
         }
         ?>

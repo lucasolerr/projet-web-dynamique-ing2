@@ -8,7 +8,7 @@ class User extends Account
 
     public function index()
     {
-        if(!$this->isLogin() or $this->model->account_type !== 'user') {
+        if (!$this->isLogin() or $this->model->account_type !== 'user') {
             \Http::redirect("index.php?controller=index&task=index");
             exit;
         }
@@ -58,7 +58,7 @@ class User extends Account
             }
             if ($selected === true) {
                 $this->model->deleteGradeCommentFromBox($used_id);
-                $this->model->addGradeCommentToBox($used_id,$grade, $comment);
+                $this->model->addGradeCommentToBox($used_id, $grade, $comment);
             }
         }
         $used = $this->model->getUsedBoxs();
@@ -85,7 +85,7 @@ class User extends Account
                 return 'remplissez le mdp';
             }
             if ($selected === true) {
-                $this->model->addBoxToOffer($possession_id,$password);
+                $this->model->addBoxToOffer($possession_id, $password);
             } else {
                 //$this->model->deleteBoxToOffer($possession_id);
             }
@@ -94,4 +94,7 @@ class User extends Account
         $contentSection = \Renderer::extractRender('view/user/possessed.html.php', compact('possessed'));
         return $contentSection;
     }
+
+    
+
 }

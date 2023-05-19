@@ -101,38 +101,39 @@
     </div>
 
     <div class="row row-cols-auto justify-content-start">
-        <?php foreach ($all_boxs as $box) : if($box['price'] != NULL): ?>
-            <div class="col card-container <?= $box['activity'] ?>" data-box-id="<?= $box['id'] ?>">
-                <div class="card p-3 mb-2" style="width: 20rem;">
-                    <img class="card-img-top" src="/public/assets/index/card.png" alt="cover">
-                    <div class="card-body">
-                        <h5 class="card-title"><?= $box['title'] ?></h5>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <?php if ($box['rating'] != NULL) : ?>
-                                <div class="ratings">
-                                    <?php
-                                    $rating = $box['rating']; // variable de notation
-                                    for ($i = 1; $i <= 5; $i++) {
-                                        if ($i <= $rating) {
-                                            echo '<i class="bi bi-star-fill rating-color"></i>'; // étoile pleine si la valeur est <= à la variable
-                                        } else {
-                                            echo '<i class="bi bi-star rating-color"></i>'; // étoile vide sinon
+        <?php foreach ($all_boxs as $box) : if ($box['price'] != NULL) : ?>
+                <div class="col card-container <?= $box['activity'] ?>" data-box-id="<?= $box['id'] ?>">
+                    <div class="card p-3 mb-2" style="width: 20rem;">
+                        <img class="card-img-top" src="/public/assets/index/card.png" alt="cover">
+                        <div class="card-body">
+                            <h5 class="card-title"><?= $box['title'] ?></h5>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <?php if ($box['rating'] != NULL) : ?>
+                                    <div class="ratings">
+                                        <?php
+                                        $rating = $box['rating']; // variable de notation
+                                        for ($i = 1; $i <= 5; $i++) {
+                                            if ($i <= $rating) {
+                                                echo '<i class="bi bi-star-fill rating-color"></i>'; // étoile pleine si la valeur est <= à la variable
+                                            } else {
+                                                echo '<i class="bi bi-star rating-color"></i>'; // étoile vide sinon
+                                            }
                                         }
-                                    }
-                                    ?>
-                                </div>
+                                        ?>
+                                    </div>
 
-                            <?php endif; ?>
-                            <h6 class="review-count"><?= $box['num_reviews'] ?> Avis</h6>
-                        </div>
-                        <div class="d-flex justify-content-between mt-3">
-                            <h5><?= number_format($box['price'], 2) ?>€</h5>
-                            <a href="#" class="btn btn-primary">Add to cart</a>
+                                <?php endif; ?>
+                                <h6 class="review-count"><?= $box['num_reviews'] ?> Avis</h6>
+                            </div>
+                            <div class="d-flex justify-content-between mt-3">
+                                <h5><?= number_format($box['price'], 2) ?>€</h5>
+                                <a href="#" class="btn btn-primary">Add to cart</a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        <?php endif; endforeach; ?>
+        <?php endif;
+        endforeach; ?>
     </div>
     <div id="3" class="container">
         <?= $hasBoxSection ?>
