@@ -4,54 +4,8 @@ namespace Models;
 
 class Account extends Model
 {
-    protected $table = "account";
     public $email;
-    
-    public function getInformationAccount(): array
-    {
-        $sql = "SELECT * FROM {$this->table} WHERE email = '{$this->email}'";
-        $query = $this->pdo->prepare($sql);
-        $query->execute();
-        $accountInfos = $query->fetchAll();
-
-        return $accountInfos;
-    }
-
-    public function getName(): array
-    {
-        $sql = "SELECT last_name FROM {$this->table} WHERE email = :email";
-        $query = $this->pdo->prepare($sql);
-        $query->execute(['email' => $this->email]);
-
-        return $query->fetch();
-    }
-
-    public function getFirstName(): array
-    {
-        $sql = "SELECT first_name FROM {$this->table} WHERE email = :email";
-        $query = $this->pdo->prepare($sql);
-        $query->execute(['email' => $this->email]);
-
-        return $query->fetch();
-    }
-
-    public function getPassword(): array
-    {
-        $sql = "SELECT account_password FROM {$this->table} WHERE email = :email";
-        $query = $this->pdo->prepare($sql);
-        $query->execute(['email' => $this->email]);
-
-        return $query->fetch();
-    }
-
-    public function getType(): array
-    {
-        $sql = "SELECT account_type FROM {$this->table} WHERE email = :email";
-        $query = $this->pdo->prepare($sql);
-        $query->execute(['email' => $this->email]);
-
-        return $query->fetch();
-    }
+    public $account_type;
 
     public function addUser($password, $email, $first_name, $last_name, $account_type)
     {
