@@ -2,6 +2,9 @@
 
 namespace Controllers;
 
+require 'config.php';
+require 'vendor/autoload.php';
+
 class Index extends Controller
 {
     protected $modelName = \Models\Index::class;
@@ -37,5 +40,15 @@ class Index extends Controller
         $isLogin = \Http::isLogin();
         $accountType = (isset($_SESSION['account_type']) ? $_SESSION['account_type'] : '');
         \Renderer::render('/index/index', compact('pageTitle', 'all_boxs', 'activities', 'isLogin', 'accountType', 'hasBoxSection'));
+    }
+
+    public function payment(){
+        $payment = new \StripePayment(STRIPE_SECRET);
+        $payment->startPayment();
+    }
+
+    public function success(){
+        echo 'Commande prise en compte';
+        // Modifier et ajouter la suppression du panier de l'utilisateur
     }
 }
