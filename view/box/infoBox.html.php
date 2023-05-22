@@ -62,7 +62,7 @@
                         <div class="border border-2 rounded-4">
                             <div class="text-center p-3">
                                 <p style=" font-size:24px; color:#FF41C6"><?= $box['box_price'] ?>€</p>
-                                <a href="index.php?controller=index&task=payment" class="btn btn-primary" style="background-color:#FF41C6">Ajouter au panier</a>
+                                <a href="index.php?controller=index&task=payment" class="btn btn-primary" style="background-color:#FF41C6; border: none;">Ajouter au panier</a>
                             </div>
                         </div>
                     </div>

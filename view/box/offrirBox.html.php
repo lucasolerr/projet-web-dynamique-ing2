@@ -8,5 +8,5 @@
         <label for="password" class="form-label">Password</label>
         <input type="password" name="password" class="form-control" id="password">
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary" style="background-color:#FF41C6; border: none;">Récupérer</button>
 </form>
