@@ -1,6 +1,6 @@
 <style>
     body {
-        background-image: url('public/BG.png');
+        background: linear-gradient(94.59deg, #4923B4 2.39%, #E878CF 97.66%);
     }
 </style>
 <div class="container-fluid ">
