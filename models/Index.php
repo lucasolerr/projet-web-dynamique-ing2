@@ -85,6 +85,23 @@ class Index extends Model
         return $cart;
     }
 
+    public function getTotalPrice($user_email)
+    {
+        $sql = "
+        SELECT SUM(box_price * articles_number) AS total_price
+        FROM in_cart
+        JOIN omnesbox ON omnesbox.box_id = in_cart.box_id
+        JOIN box_offer ON chosen_partner_email = partner_email AND box_offer.box_id = omnesbox.box_id
+        WHERE user_email = :email
+        ";
+        $query = $this->pdo->prepare($sql);
+        $query->execute(['email' => $user_email]);
+        $result = $query->fetch();
+        $totalPrice = $result['total_price'];
+
+        return $totalPrice;
+    }
+
     public function updatePurchaseWhenCarted()
     {
         $cart = $_SESSION['cart'];

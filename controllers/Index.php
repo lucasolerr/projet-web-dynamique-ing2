@@ -55,8 +55,9 @@ class Index extends Controller
         if($isLogin){
             $cart = $this->model->getCart($_SESSION['email']);
             $_SESSION['cart'] = $cart;
+            $totalPrice = $this->model->getTotalPrice($_SESSION['email']);
         }
-        \Renderer::render('/index/cart', compact('pageTitle', 'cart', 'isLogin'));
+        \Renderer::render('/index/cart', compact('pageTitle', 'cart', 'isLogin', 'totalPrice'));
     }
 
     public function success()

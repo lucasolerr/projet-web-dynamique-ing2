@@ -11,13 +11,13 @@
             <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link text-white active" aria-current="page" href="#1">Accueil</a>
+                        <a class="nav-link text-white active" aria-current="page" href="index.php?controller=index&task=index">Accueil</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="#2">Cartes Cadeaux</a>
+                        <a class="nav-link text-white" href="index.php?controller=index&task=index">Cartes Cadeaux</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="#3">J'ai une Omnesbox</a>
+                        <a class="nav-link text-white" href="index.php?controller=index&task=index">J'ai une Omnesbox</a>
                     </li>
                 </ul>
             </div>
@@ -65,13 +65,16 @@
                             <h4><?= $cart['box_title'] ?></h4>
                         </div>
                         <div class="col-md-1 d-flex justify-content-center align-items-center">
-                            <p><?= $cart['articles_number'] ?></p>
+                            <p class="quantity fw-semibold"><?= $cart['articles_number'] ?></p>
                         </div>
                         <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                            <p><?= $cart['articles_number'] ?>€</p>
+                            <p class="price fw-bold"><?= $cart['box_price'] ?>€</p>
                         </div>
                         <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                            <i class="bi bi-trash"></i>
+                            <button>
+                                <i class="bi bi-trash"></i>
+                            </button>
+
                         </div>
                     </div>
                 <?php endforeach; ?>
@@ -79,10 +82,10 @@
             <div class="col-md-3 mx-auto text-center p-3 rounded-5 bg-white text-dark max-height-container">
                 <div class="row p-3">
                     <div class="col-md-6 ">
-                        <p>Total :</p>
+                        <p class="total fw-bold">Total :</p>
                     </div>
                     <div class="col-md-6">
-                        <p>XX €</p>
+                        <p class="priceTotal fw-bold"> <?= $totalPrice ?> €</p>
                     </div>
                 </div>
 
@@ -99,6 +102,21 @@
 <style>
     .max-height-container {
         max-height: 175px;
-        /* Définissez la hauteur maximale souhaitée */
+    }
+
+    .quantity {
+        font-size: 15px;
+    }
+
+    .price {
+        font-size: 20px;
+    }
+
+    .total {
+        font-size: 23px;
+    }
+
+    .priceTotal {
+        font-size: 23px;
     }
 </style>
