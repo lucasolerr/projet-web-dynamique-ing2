@@ -1,31 +1,22 @@
-<header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="index.php?controller=partner&task=index"><?= $username['last_name']; ?></a>
+<header class="navbar  sticky-top bg-dark flex-md-nowrap p-0 shadow">
+    <a class="navbar-brand col-md-3 text-white col-lg-2 me-0 px-3" href="index.php?controller=partner&task=index"><?= $username['last_name']; ?></a>
     <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="navbar-nav">
         <div class="nav-item text-nowrap">
-            <a class="nav-link px-3" href="index.php?controller=account&task=logout">Sign out</a>
+            <a class="nav-link text-white active" aria-current="page" href="index.php?controller=index&task=index">Accueil</a>
+        </div>
+    </div>
+
+    <div class="navbar-nav">
+        <div class="nav-item text-nowrap">
+            <a class="nav-link text-white px-3" href="index.php?controller=account&task=logout">Sign out</a>
         </div>
     </div>
 </header>
 
-<style>
-    .notification-badge {
-        display: inline-block;
-        background-color: red;
-        color: white;
-        border-radius: 50%;
-        font-size: 12px;
-        width: 20px;
-        height: 20px;
-        text-align: center;
-        line-height: 20px;
-        margin-left: 5px;
-    }
-</style>
-
-<div class="container-fluid">
+<div>
     <div class="row">
         <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
             <div class="position-sticky pt-3">
@@ -67,3 +58,19 @@
         </main>
     </div>
 </div>
+
+
+<style>
+    .notification-badge {
+        display: inline-block;
+        background-color: red;
+        color: white;
+        border-radius: 50%;
+        font-size: 12px;
+        width: 20px;
+        height: 20px;
+        text-align: center;
+        line-height: 20px;
+        margin-left: 5px;
+    }
+</style>
