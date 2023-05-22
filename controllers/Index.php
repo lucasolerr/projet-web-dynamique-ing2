@@ -44,7 +44,6 @@ class Index extends Controller
 
     public function payment()
     {
-
         $payment = new \StripePayment(STRIPE_SECRET);
         $payment->startPayment();
     }
@@ -55,6 +54,7 @@ class Index extends Controller
         $isLogin = \Http::isLogin();
         if($isLogin){
             $cart = $this->model->getCart($_SESSION['email']);
+            $_SESSION['cart'] = $cart;
         }
         \Renderer::render('/index/cart', compact('pageTitle', 'cart', 'isLogin'));
     }
@@ -62,6 +62,7 @@ class Index extends Controller
     public function success()
     {
         echo 'Commande prise en compte';
+        $this->model->updatePurchaseWhenCarted();
         // Modifier et ajouter la suppression du panier de l'utilisateur
     }
 }

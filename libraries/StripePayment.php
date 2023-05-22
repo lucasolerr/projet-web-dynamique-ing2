@@ -10,32 +10,36 @@ class StripePayment
 {
     private $clientSecret;
     private $webhookSecret;
-    public function __construct( string $clientSecret,  string $webhookSecret = '')
+    public function __construct(string $clientSecret,  string $webhookSecret = '')
     {
-            $this->clientSecret = $clientSecret;
-            $this->webhookSecret = $webhookSecret;
+        $this->clientSecret = $clientSecret;
+        $this->webhookSecret = $webhookSecret;
         Stripe::setApiKey($this->clientSecret);
     }
 
     public function startPayment()
     {
-        $cart = new Cart;
+        isset($_SESSION['cart']) ? $cart = $_SESSION['cart'] : $cart = NULL;
+
+        $result = array();
+
+        foreach ($cart as $item) {
+            $result[] = array(
+                'quantity' => $item['articles_number'],
+                'price_data' => array(
+                    'currency' => 'EUR',
+                    'product_data' => array(
+                        'name' => $item['box_title']
+                    ),
+                    'unit_amount' => intval(floatval($item['box_price'] * 100))
+                )
+            );
+        }
         $session = Session::create([
-            'line_items' => [
-                array_map(fn (array $product) => [
-                    'quantity' => 1,
-                    'price_data' => [
-                        'currency' => 'EUR',
-                        'product_data' => [
-                            'name' => $product['name']
-                        ],
-                        'unit_amount' => $product['price']
-                    ]
-                ],$cart->getProducts())
-            ],
+            'line_items' => $result,
             'mode' => 'payment',
-            'success_url' => 'http://localhost:8000/index.php?controller=index&task=success',
-            'cancel_url' => 'http://localhost:8000/index.php?controller=index&task=cancel',
+            'success_url' => 'http://localhost/projet-web-dynamique-3g/index.php?controller=index&task=success',
+            'cancel_url' => 'http://localhost/projet-web-dynamique-3g/index.php?controller=index&task=cancel',
             'billing_address_collection' => 'required',
             'metadata' => [
                 'box_id' => 1
@@ -54,6 +58,5 @@ class StripePayment
             $signature,
             $this->webhookSecret
         );
-         
     }
 }

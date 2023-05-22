@@ -76,11 +76,38 @@ class Index extends Model
         $sql = "
         SELECT * FROM in_cart
         JOIN omnesbox on omnesbox.box_id = in_cart.box_id
+        JOIN box_offer on chosen_partner_email = partner_email AND box_offer.box_id = omnesbox.box_id
         WHERE user_email = :email
         ";
         $query = $this->pdo->prepare($sql);
         $query->execute(['email' => $user_email]);
         $cart = $query->fetchAll();
         return $cart;
+    }
+
+    public function updatePurchaseWhenCarted()
+    {
+        $cart = $_SESSION['cart'];
+        var_dump($cart);
+        foreach ($cart as $item) {
+            for ($i = 0; $i < $item['articles_number']; $i++) {
+                $date = date('Y-m-d');
+                $sql = "
+                INSERT INTO purchase (purchase_date, user_email, box_id, chosen_partner_email)
+                VALUES (:date, :email, :id, :emailpart)";
+                $query = $this->pdo->prepare($sql);
+                $query->execute(['id' => $item['box_id'], 'email' => $item['user_email'], 'date' => $date, 'emailpart' => $item['partner_email']]);
+                $lastInsertedId = $this->pdo->lastInsertId();
+                $date = date('Y-m-d');
+                $sql = "
+                INSERT INTO possession (possession_id, user_email, possession_date)
+                VALUES (:id, :email, :date)";
+                $query = $this->pdo->prepare($sql);
+                $query->execute(['id' => $lastInsertedId, 'email' => $item['user_email'], 'date' => $date]);
+            }
+            $sql = "DELETE FROM in_cart WHERE box_id = :id AND user_email = :email";
+            $query = $this->pdo->prepare($sql);
+            $query->execute(['id' => $item['box_id'], 'email' => $item['user_email']]);
+        }
     }
 }
