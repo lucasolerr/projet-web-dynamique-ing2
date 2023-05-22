@@ -62,7 +62,7 @@
                         <div class="border border-2 rounded-4">
                             <div class="text-center p-3">
                                 <p style=" font-size:24px; color:#FF41C6"><?= $box['box_price'] ?>€</p>
-                                <a href="index.php?controller=index&task=cart" class="btn btn-primary" style="background-color:#FF41C6; border: none;">Ajouter au panier</a>
+                                <button id="cart" class="btn btn-primary" style="background-color:#FF41C6; border: none;">Ajouter au panier</button>
                             </div>
                         </div>
                     </div>
@@ -125,6 +125,14 @@
 
 <script>
     $(document).ready(function() {
+        $('#cart').click(function() {
+            var boxId = <?= $box['box_id'] ?>;
+            //var quantity = <?= $quantity ?>;
+            var quantity = 2;
+            var partnerEmail = '<?= $partner['partner_email'] ?>';
+            var url = 'index.php?controller=index&task=cart&action=add&box_id=' + boxId + '&quantity=' + quantity + '&partner_email=' + partnerEmail;
+            window.location.href = url;
+        });
         $('select.form-select').change(function() {
             var partner_email = $(this).val(); // récupérer l'email du partenaire sélectionné
             console.log(partner_email);
