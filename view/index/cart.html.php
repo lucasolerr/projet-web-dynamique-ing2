@@ -71,10 +71,9 @@
                             <p class="price fw-bold"><?= $cart['box_price'] ?>€</p>
                         </div>
                         <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                            <button>
+                            <button class="delete-button" data-box-id="<?= $cart['box_id'] ?>">
                                 <i class="bi bi-trash"></i>
                             </button>
-
                         </div>
                     </div>
                 <?php endforeach; ?>
@@ -95,6 +94,20 @@
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function() {
+        // Détecter le clic sur le bouton de suppression
+        $('.delete-button').click(function() {
+            // Récupérer les valeurs des paramètres à partir des attributs data du bouton
+            var action = 'remove';
+            var boxId = $(this).data('box-id');
+
+            // Effectuer la redirection avec les paramètres GET
+            window.location.href = 'index.php?controller=index&task=cart&action=' + action + '&box_id=' + boxId;
+        });
+    });
+</script>
 
 <style>
     .max-height-container {

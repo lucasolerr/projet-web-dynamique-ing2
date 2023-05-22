@@ -71,6 +71,26 @@ class Index extends Model
         return $reviews;
     }
 
+    public function addToCart($boxId, $email, $quantity, $partner_email)
+    {
+        
+        $sql = "
+        INSERT INTO in_cart (user_email, box_id, chosen_partner_email, articles_number)
+        VALUES (:email, :id, :partenaire, :quantity)
+        ";
+        $query = $this->pdo->prepare($sql);
+        $query->execute(['id' => $boxId, 'email' => $email, 'partenaire' => $partner_email, 'quantity' => $quantity]);
+    }
+
+    public function removeFromCart($boxId, $email)
+    {
+        $sql = "
+        DELETE FROM in_cart WHERE box_id = :id AND user_email = :email
+        ";
+        $query = $this->pdo->prepare($sql);
+        $query->execute(['id' => $boxId, 'email' => $email]);
+    }
+
     public function getCart($user_email)
     {
         $sql = "

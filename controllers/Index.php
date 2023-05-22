@@ -52,10 +52,22 @@ class Index extends Controller
     {
         $pageTitle = "Panier";
         $isLogin = \Http::isLogin();
-        if($isLogin){
+        if ($isLogin) {
+            if (isset($_GET['action']) && $_GET['action'] === 'add' && isset($_GET['box_id']) && isset($_GET['quantity']) && isset($_GET['partner_email'])) {
+                $boxId = $_GET['box_id'];
+                $quantity = $_GET['quantity'];
+                $partnerEmail = $_GET['partner_email'];
+                // Ajoutez le produit au panier en utilisant l'ID du produit
+                $this->model->addToCart($boxId, $_SESSION['email'], $quantity, $partnerEmail);
+            } else if (isset($_GET['action']) && $_GET['action'] === 'remove' && isset($_GET['box_id'])) {
+                $boxId = $_GET['box_id'];
+                $this->model->removeFromCart($boxId, $_SESSION['email']);
+            }
             $cart = $this->model->getCart($_SESSION['email']);
             $_SESSION['cart'] = $cart;
             $totalPrice = $this->model->getTotalPrice($_SESSION['email']);
+        } else {
+            \Http::redirect('index.php?controller=account&task=login');
         }
         \Renderer::render('/index/cart', compact('pageTitle', 'cart', 'isLogin', 'totalPrice'));
     }

@@ -72,7 +72,7 @@
                             <div class="text-center p-3">
                                 <p style=" font-size:24px; color:#FF41C6"><?= $box['box_price'] ?>€</p>
                                 <div class="p-3">
-                                    <select class="form-select " aria-label="Default select example" style="color:#FF41C6;">
+                                    <select id="quantity-select" class="form-select" aria-label="Default select example" style="color:#FF41C6;">
                                         <option value="">Choisissez la quantité</option>
                                         <option value="1">1</option>
                                         <option value="2">2</option>
@@ -86,13 +86,12 @@
                                         <option value="10">10</option>
                                     </select>
                                 </div>
-
-                                <a href="index.php?controller=index&task=cart" class="btn btn-primary" style="background-color:#FF41C6; border: none;">Ajouter au panier</a>
+                                <button id="cart" class="btn btn-primary" style="background-color:#FF41C6; border: none;">Ajouter au panier</button>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-3  mx-auto pt-3">
-                        <select class="form-select" aria-label="Default select example">
+                        <select class="form-select test" aria-label="Default select example">
                             <option value="">Choisissez votre partenaire</option>
                             <?php foreach ($partners as $partner) : ?>
                                 <?php $select;
@@ -155,7 +154,17 @@
 
 <script>
     $(document).ready(function() {
-        $('select.form-select').change(function() {
+        $('#cart').click(function() {
+            var boxId = <?= $box['box_id'] ?>;
+            var quantity = $('#quantity-select').val();
+            if (quantity) {
+                var partnerEmail = '<?= $partner['partner_email'] ?>';
+                var url = 'index.php?controller=index&task=cart&action=add&box_id=' + boxId + '&quantity=' + quantity + '&partner_email=' + partnerEmail;
+                window.location.href = url;
+            }
+
+        });
+        $('select.test').change(function() {
             var partner_email = $(this).val(); // récupérer l'email du partenaire sélectionné
             console.log(partner_email);
             var url = window.location.href; // récupérer l'URL de la page avec les paramètres GET existants
