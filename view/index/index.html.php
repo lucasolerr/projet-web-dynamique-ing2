@@ -52,8 +52,8 @@
         <div class="row d-flex align-items-center">
             <div class="col-md-6">
                 <h2>Venez ACHETER une carte cadeau</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor, at aliquam. Laborum in velit eveniet, earum totam nemo nesciunt voluptates voluptate sed dolor maiores consectetur sint, recusandae adipisci consequatur. Pariatur!</p>
-                <button class="btn btn-lg btn-primary">Acheter</button>
+                <p>Découvrez notre vaste sélection de cartes cadeaux et offrez un présent unique à vos proches. Notre section "J'ai une Omnesbox" vous propose d'offrir une expérience de shopping en ligne pratique et agréable.</p>
+                <button class="btn btn-lg btn-primary" style="background-color:#FF41C6; border: none;">Acheter</button>
                 <button class="btn btn-lg btn-secondary">Infos</button>
             </div>
             <div class="col-md-6 d-flex justify-content-center">
@@ -61,6 +61,7 @@
             </div>
         </div>
     </div>
+</div>
 </div>
 
 <div class="mt-5 container">
@@ -93,6 +94,8 @@
         <div class="col">
             <div class="btn-group" role="group">
                 <button type="button" class="btn btn-secondary filter-button" data-filter="all">Tous</button>
+                <button type="button" class="btn btn-secondary filter-button" data-filter="price-asc">Prix décroissant</button>
+                <button type="button" class="btn btn-secondary filter-button" data-filter="price-desc">Prix croissant</button>
                 <?php foreach ($activities as $activity) : ?>
                     <button type="button" class="btn btn-secondary filter-button" data-filter="<?= $activity['activity_title'] ?>"><?= $activity['activity_title'] ?></button>
                 <?php endforeach; ?>
@@ -102,9 +105,12 @@
 
     <div class="row row-cols-auto justify-content-start">
         <?php foreach ($all_boxs as $box) : if ($box['price'] != NULL) : ?>
-                <div class="col card-container <?= $box['activity'] ?>" data-box-id="<?= $box['id'] ?>">
+                <div class="col card-container <?= $box['activity'] ?>" data-box-id="<?= $box['id'] ?>" data-price="<?= $box['price'] ?>">
                     <div class="card p-3 mb-2" style="width: 20rem;">
-                        <img class="card-img-top" src="/projet-web-dynamique-3g/public/assets/index/card.png" alt="cover">
+                        <?php $nom = $box['activity'];
+                        $chemin_image = "/projet-web-dynamique-3g/public/assets/index/" . $nom . ".jpg";
+                        ?>
+                        <img class="card-img-top" src=<?= $chemin_image ?> alt="cover">
                         <div class="card-body">
                             <h5 class="card-title"><?= $box['title'] ?></h5>
                             <div class="d-flex justify-content-between align-items-center">
@@ -127,7 +133,7 @@
                             </div>
                             <div class="d-flex justify-content-between mt-3">
                                 <h5><?= number_format($box['price'], 2) ?>€</h5>
-                                <a href="#" class="btn btn-primary">Voir la box</a>
+                                <a href="#" class="btn btn-primary" style="background-color:#FF41C6; border: none;">Voir la box</a>
                             </div>
                         </div>
                     </div>
@@ -146,14 +152,24 @@
             var value = $(this).attr('data-filter');
             if (value == "all") {
                 $('.card-container').show();
+            } else if (value == "price-asc") {
+                $('.card-container').sort(function(a, b) {
+                    var priceA = parseFloat($(a).data('price'));
+                    var priceB = parseFloat($(b).data('price'));
+                    return priceA - priceB;
+                }).appendTo('.row.row-cols-auto');
+            } else if (value == "price-desc") {
+                $('.card-container').sort(function(a, b) {
+                    var priceA = parseFloat($(a).data('price'));
+                    var priceB = parseFloat($(b).data('price'));
+                    return priceB - priceA;
+                }).appendTo('.row.row-cols-auto');
             } else {
                 $(".card-container").not('.' + value).hide();
                 $('.card-container').filter('.' + value).show();
             }
         });
-    });
 
-    $(document).ready(function() {
         $('.card-container').click(function() {
             var box_id = $(this).data('box-id');
             window.location.href = 'index.php?controller=box&task=afficherbox&box_id=' + box_id;
@@ -189,6 +205,27 @@
     }
 
     .filter-button:hover {
+        background-color: #ccc;
+        border-bottom: 1px solid #6f42c1;
+        color: #333;
+    }
+
+    .filter-button[data-filter="highest-price"],
+    .filter-button[data-filter="lowest-price"] {
+        background-color: #fff;
+        color: #333;
+        border: none;
+        border-radius: 0;
+        padding: 10px 20px;
+        margin: 5px;
+        font-size: 16px;
+        font-weight: bold;
+        text-transform: uppercase;
+        text-decoration: none;
+    }
+
+    .filter-button[data-filter="highest-price"]:hover,
+    .filter-button[data-filter="lowest-price"]:hover {
         background-color: #ccc;
         border-bottom: 1px solid #6f42c1;
         color: #333;
