@@ -88,12 +88,9 @@
                         <p class="priceTotal fw-bold"> <?= $totalPrice ?> €</p>
                     </div>
                 </div>
-
-                <form method="POST" action="">
-                    <div class="text-center">
-                        <button type="submit" name="valider" value="valider" class="btn btn-primary mt-3" style="background-color: #61B500;">Valider ma commande</button>
-                    </div>
-                </form>
+                <div class="text-center">
+                    <a href="index.php?controller=index&task=payment" class="btn btn-primary mt-3" style="background-color: #61B500;">Valider ma commande</a>
+                </div>
             </div>
         </div>
     </div>
