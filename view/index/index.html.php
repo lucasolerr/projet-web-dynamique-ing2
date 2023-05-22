@@ -37,10 +37,17 @@
                         <?php endif; ?>
                     </li>
                     <li class="nav-item">
-                        <a href="index.php?controller=index&task=cart" class="nav-link text-white">
-                            <i class="bi bi-cart"></i>
-                            Panier
-                        </a>
+                        <?php if ($isLogin) : ?>
+                            <a href="index.php?controller=index&task=cart" class="nav-link text-white">
+                                <i class="bi bi-cart"></i>
+                                Panier
+                            </a>
+                        <?php else : ?>
+                            <a href="index.php?controller=account&task=login" class="nav-link text-white">
+                                <i class="bi bi-cart"></i>
+                                Panier
+                            </a>
+                        <?php endif; ?>
                     </li>
                 </ul>
             </div>

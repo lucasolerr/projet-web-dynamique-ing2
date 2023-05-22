@@ -35,7 +35,7 @@
                             <p>Vous n'avez pas de compte ? <a href="index.php?controller=account&task=register">S'enregistrer</a></p>
                         </div>
                         <div class="text-center">
-                            <button type="submit" name="login" value="login" class="btn btn-primary mt-3">Se connecter</button>
+                            <button type="submit" name="login" value="login" class="btn btn-primary mt-3" style="background-color:#FF41C6; border: none;">Se connecter</button>
                         </div>
                     </form>
                 </div>
