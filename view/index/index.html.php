@@ -104,7 +104,10 @@
         <?php foreach ($all_boxs as $box) : if ($box['price'] != NULL) : ?>
                 <div class="col card-container <?= $box['activity'] ?>" data-box-id="<?= $box['id'] ?>">
                     <div class="card p-3 mb-2" style="width: 20rem;">
-                        <img class="card-img-top" src="/projet-web-dynamique-3g/public/assets/index/card.png" alt="cover">
+                        <?php $nom = $box['activity'];
+                        $chemin_image = "/projet-web-dynamique-3g/public/assets/index/" . $nom . ".jpg";
+                        ?>
+                        <img class="card-img-top" src=<?= $chemin_image ?> alt="cover">
                         <div class="card-body">
                             <h5 class="card-title"><?= $box['title'] ?></h5>
                             <div class="d-flex justify-content-between align-items-center">
