@@ -43,6 +43,7 @@ class Index extends Controller
     }
 
     public function payment(){
+        
         $payment = new \StripePayment(STRIPE_SECRET);
         $payment->startPayment();
     }

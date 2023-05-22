@@ -3,7 +3,7 @@
     <nav class="navbar navbar-expand-lg">
         <div class="container">
             <a href="#" class="navbar-brand">
-                <img src="/public/assets/index/logo.svg" alt="Logo Omnesbox">
+                <img src="/projet-web-dynamique-3g/public/assets/index/logo.svg" alt="Logo Omnesbox">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -57,7 +57,7 @@
                 <button class="btn btn-lg btn-secondary">Infos</button>
             </div>
             <div class="col-md-6 d-flex justify-content-center">
-                <img class="img-fluid" src="/public/assets/index/illustration.png" alt="illustration">
+                <img class="img-fluid" src="/projet-web-dynamique-3g/public/assets/index/illustration.png" alt="illustration">
             </div>
         </div>
     </div>
@@ -69,19 +69,19 @@
     </div>
     <div class="row justify-content-center">
         <div class="col">
-            <img src="/public/assets/index/partenaires/microsoft.svg" alt="microsoft">
+            <img src="/projet-web-dynamique-3g/public/assets/index/partenaires/microsoft.svg" alt="microsoft">
         </div>
         <div class="col">
-            <img src="/public/assets/index/partenaires/treehouse.svg" alt="treehouse">
+            <img src="/projet-web-dynamique-3g/public/assets/index/partenaires/treehouse.svg" alt="treehouse">
         </div>
         <div class="col">
-            <img src="/public/assets/index/partenaires/amazon.svg" alt="amazon">
+            <img src="/projet-web-dynamique-3g/public/assets/index/partenaires/amazon.svg" alt="amazon">
         </div>
         <div class="col">
-            <img src="/public/assets/index/partenaires/slack.svg" alt="slack">
+            <img src="/projet-web-dynamique-3g/public/assets/index/partenaires/slack.svg" alt="slack">
         </div>
         <div class="col">
-            <img src="/public/assets/index/partenaires/google.svg" alt="google">
+            <img src="/projet-web-dynamique-3g/public/assets/index/partenaires/google.svg" alt="google">
         </div>
     </div>
 </div>
@@ -104,7 +104,7 @@
         <?php foreach ($all_boxs as $box) : if ($box['price'] != NULL) : ?>
                 <div class="col card-container <?= $box['activity'] ?>" data-box-id="<?= $box['id'] ?>">
                     <div class="card p-3 mb-2" style="width: 20rem;">
-                        <img class="card-img-top" src="/public/assets/index/card.png" alt="cover">
+                        <img class="card-img-top" src="/projet-web-dynamique-3g/public/assets/index/card.png" alt="cover">
                         <div class="card-body">
                             <h5 class="card-title"><?= $box['title'] ?></h5>
                             <div class="d-flex justify-content-between align-items-center">
@@ -127,7 +127,7 @@
                             </div>
                             <div class="d-flex justify-content-between mt-3">
                                 <h5><?= number_format($box['price'], 2) ?>€</h5>
-                                <a href="#" class="btn btn-primary">Add to cart</a>
+                                <a href="#" class="btn btn-primary">Voir la box</a>
                             </div>
                         </div>
                     </div>

@@ -39,7 +39,9 @@ class Box extends Controller
 
         $pageTitle = $box['box_title'];
 
-        \Renderer::render('/box/infoBox', compact('pageTitle', 'box', 'partners', 'reviews', 'num_reviews', 'grade'));
+        $isLogin = \Http::isLogin();
+
+        \Renderer::render('/box/infoBox', compact('pageTitle', 'box', 'partners', 'reviews', 'num_reviews', 'grade', 'isLogin'));
     }
 
     public function offrirBox()

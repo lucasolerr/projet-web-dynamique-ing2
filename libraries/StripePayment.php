@@ -8,8 +8,12 @@ require 'vendor/autoload.php';
 
 class StripePayment
 {
-    public function __construct(readonly private string $clientSecret, readonly private string $webhookSecret = '')
+    private $clientSecret;
+    private $webhookSecret;
+    public function __construct( string $clientSecret,  string $webhookSecret = '')
     {
+            $this->clientSecret = $clientSecret;
+            $this->webhookSecret = $webhookSecret;
         Stripe::setApiKey($this->clientSecret);
     }
 

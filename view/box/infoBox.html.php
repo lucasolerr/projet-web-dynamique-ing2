@@ -5,6 +5,42 @@
 </style>
 <div class="container-fluid">
     <div class="row">
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
+                <a href="#" class="navbar-brand">
+                    <img src="/projet-web-dynamique-3g/public/assets/index/logo.svg" alt="Logo Omnesbox">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                    <a class="nav-link text-white active" aria-current="page" href="index.php?controller=index&task=index">Accueil</a>
+                </div>
+                <div class="right-area">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <?php if ($isLogin) : ?>
+                                <a href="index.php?controller=<?= $accountType; ?>&task=index" class="nav-link text-white">
+                                    <i class="bi bi-person"></i>
+                                    Mon compte
+                                </a>
+                            <?php else : ?>
+                                <a href="index.php?controller=account&task=login" class="nav-link text-white">
+                                    <i class="bi bi-person"></i>
+                                    Login
+                                </a>
+                            <?php endif; ?>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link text-white">
+                                <i class="bi bi-cart"></i>
+                                Panier
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
         <div class=" mx-auto p-5">
             <div class="pt-3 pb-5 rounded-5 bg-white text-dark">
                 <div class="p-3 m-3">
