@@ -15,5 +15,3 @@
 <body>
     <?= $pageContent ?>
 </body>
-
-</html>
