@@ -37,7 +37,7 @@
                         <?php endif; ?>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link text-white">
+                        <a href="index.php?controller=index&task=cart" class="nav-link text-white">
                             <i class="bi bi-cart"></i>
                             Panier
                         </a>

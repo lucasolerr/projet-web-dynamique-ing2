@@ -56,7 +56,6 @@ class Index extends Controller
         if($isLogin){
             $cart = $this->model->getCart($_SESSION['email']);
         }
-        
         \Renderer::render('/index/cart', compact('pageTitle', 'cart'));
     }
 
