@@ -44,7 +44,7 @@
 
                         </div>
                         <div class="text-center">
-                            <button type="submit" name="register" value="register" class="btn btn-primary mt-3">S'enregistrer</button>
+                            <button type="submit" name="register" value="register" class="btn btn-primary mt-3" style="background-color:#FF41C6; border: none;">S'enregistrer</button>
                         </div>
                     </form>
                 </div>

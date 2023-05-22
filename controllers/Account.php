@@ -32,7 +32,7 @@ class Account extends Controller
                     // Stocker l'ID de l'utilisateur dans la session
                     $_SESSION['email'] = $email;
                     $_SESSION['account_type'] = $user['account_type'];
-                    \Http::redirect('index.php?controller=' . $_SESSION['account_type'] . '&task=index');
+                    \Http::redirect("index.php?controller=index&task=index");
                     return $user;
                 } else if ($user && $user['account_type'] == 'partner') {
                     // Stocker l'ID de l'utilisateur dans la session
