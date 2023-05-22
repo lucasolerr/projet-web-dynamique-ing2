@@ -20,7 +20,7 @@
                     <ul class="navbar-nav">
                         <li class="nav-item">
                             <?php if ($isLogin) : ?>
-                                <a href="index.php?controller=<?= $accountType; ?>&task=index" class="nav-link text-white">
+                                <a href="index.php?controller=<?= $_SESSION['account_type']; ?>&task=index" class="nav-link text-white">
                                     <i class="bi bi-person"></i>
                                     Mon compte
                                 </a>
@@ -32,10 +32,17 @@
                             <?php endif; ?>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link text-white">
-                                <i class="bi bi-cart"></i>
-                                Panier
-                            </a>
+                            <?php if ($isLogin) : ?>
+                                <a href="index.php?controller=index&task=cart" class="nav-link text-white">
+                                    <i class="bi bi-cart"></i>
+                                    Panier
+                                </a>
+                            <?php else : ?>
+                                <a href="index.php?controller=account&task=login" class="nav-link text-white">
+                                    <i class="bi bi-cart"></i>
+                                    Panier
+                                </a>
+                            <?php endif; ?>
                         </li>
                     </ul>
                 </div>
@@ -62,6 +69,22 @@
                         <div class="border border-2 rounded-4">
                             <div class="text-center p-3">
                                 <p style=" font-size:24px; color:#FF41C6"><?= $box['box_price'] ?>€</p>
+                                <div class="p-3">
+                                    <select class="form-select " aria-label="Default select example" style="color:#FF41C6;">
+                                        <option value="">Choisissez la quantité</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
+                                    </select>
+                                </div>
+
                                 <a href="index.php?controller=index&task=cart" class="btn btn-primary" style="background-color:#FF41C6; border: none;">Ajouter au panier</a>
                             </div>
                         </div>
@@ -80,35 +103,39 @@
                             <?php endforeach; ?>
                         </select>
                     </div>
-                    <?php if ($grade != NULL) : ?>
-                        <div class="ratings">
-                            <?php
-                            $rating = $grade; // variable de notation
-                            for ($i = 1; $i <= 5; $i++) {
-                                if ($i <= $rating) {
-                                    echo '<i class="bi bi-star-fill rating-color"></i>'; // étoile pleine si la valeur est <= à la variable
-                                } else {
-                                    echo '<i class="bi bi-star rating-color"></i>'; // étoile vide sinon
+                    <div class="row">
+                        <?php if ($grade != NULL) : ?>
+
+                            <div class="ratings p-3 col-md-2 text-center ">
+                                <?php
+                                $rating = $grade; // variable de notation
+                                for ($i = 1; $i <= 5; $i++) {
+                                    if ($i <= $rating) {
+                                        echo '<i class="bi bi-star-fill rating-color"></i>'; // étoile pleine si la valeur est <= à la variable
+                                    } else {
+                                        echo '<i class="bi bi-star rating-color"></i>'; // étoile vide sinon
+                                    }
                                 }
-                            }
-                            ?>
-                            <p><?= $num_reviews ?> Avis</p>
-                        </div>
-                    <?php else : ?>
-                        <div class="rating">
-                            <i class="bi bi-star rating-color"></i>
-                            <i class="bi bi-star rating-color"></i>
-                            <i class="bi bi-star rating-color"></i>
-                            <i class="bi bi-star rating-color"></i>
-                            <i class="bi bi-star rating-color"></i>
-                            <p>0 avis</p>
-                        </div>
-                    <?php endif; ?>
+                                ?>
+                                <p><?= $num_reviews ?> Avis</p>
+                            </div>
+                        <?php else : ?>
+                            <div class="rating p-3 col-md-2 text-center">
+                                <i class="bi bi-star rating-color"></i>
+                                <i class="bi bi-star rating-color"></i>
+                                <i class="bi bi-star rating-color"></i>
+                                <i class="bi bi-star rating-color"></i>
+                                <i class="bi bi-star rating-color"></i>
+                                <p>0 avis</p>
+                            </div>
+                        <?php endif; ?>
+                    </div>
                     <form method="POST" action="">
                     </form>
-                    <div class="md-12">
-                        <h2>Avis :</h2>
-                        <?php foreach ($reviews as $review) : ?>
+
+                    <h2 class="col-md-2 text-center">Les Avis :</h2>
+                    <?php foreach ($reviews as $review) : ?>
+                        <div class="col-md-12 p-3">
                             <div class="alert alert-info" role="alert">
                                 <strong><?= $review['user_email'] ?></strong> <?= $review['grade'] ?>/5 : <?= $review['comment'] ?>
                                 <div>
@@ -116,7 +143,8 @@
                                 </div>
                             </div>
                         <?php endforeach; ?>
-                    </div>
+                        </div>
+
                 </div>
             </div>
         </div>
