@@ -70,4 +70,17 @@ class Index extends Model
         $reviews = $query->fetchColumn();
         return $reviews;
     }
+
+    public function getCart($user_email)
+    {
+        $sql = "
+        SELECT * FROM in_cart
+        JOIN omnesbox on omnesbox.box_id = in_cart.box_id
+        WHERE user_email = :email
+        ";
+        $query = $this->pdo->prepare($sql);
+        $query->execute(['email' => $user_email]);
+        $cart = $query->fetchAll();
+        return $cart;
+    }
 }

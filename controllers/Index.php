@@ -42,13 +42,26 @@ class Index extends Controller
         \Renderer::render('/index/index', compact('pageTitle', 'all_boxs', 'activities', 'isLogin', 'accountType', 'hasBoxSection'));
     }
 
-    public function payment(){
-        
+    public function payment()
+    {
+
         $payment = new \StripePayment(STRIPE_SECRET);
         $payment->startPayment();
     }
 
-    public function success(){
+    public function cart()
+    {
+        $pageTitle = "Panier";
+        $isLogin = \Http::isLogin();
+        if($isLogin){
+            $cart = $this->model->getCart($_SESSION['email']);
+        }
+        
+        \Renderer::render('/index/cart', compact('pageTitle', 'cart'));
+    }
+
+    public function success()
+    {
         echo 'Commande prise en compte';
         // Modifier et ajouter la suppression du panier de l'utilisateur
     }
