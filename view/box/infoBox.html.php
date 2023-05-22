@@ -55,8 +55,10 @@
                 </div>
                 <div class="row">
                     <div class="col-md-3 mx-auto float-start">
-                        <img src="public/assets/box/parachute.jpg" class="rounded img-fluid">
-
+                        <?php $nom = $box['activity_title'];
+                        $chemin_image = "/projet-web-dynamique-3g/public/assets/index/" . $nom . ".jpg";
+                        ?>
+                        <img src=<?= $chemin_image ?> class="rounded img-fluid">
                     </div>
                     <div class="col-md-5 mx-auto">
                         <div class="ms-4">
