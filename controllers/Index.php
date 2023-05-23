@@ -74,8 +74,12 @@ class Index extends Controller
 
     public function success()
     {
-        echo 'Commande prise en compte';
         $this->model->updatePurchaseWhenCarted();
-        // Modifier et ajouter la suppression du panier de l'utilisateur
+        echo '<script>alert("Paiment réalisé avec succès !");window.location.href = "index.php?controller=user&task=index";</script>';
+    }
+
+    public function cancel()
+    {
+        echo '<script>alert("Paiment annulé !");window.location.href = "index.php?controller=index&task=index";</script>';
     }
 }

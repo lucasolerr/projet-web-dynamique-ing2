@@ -8,6 +8,7 @@
                 <th scope="col">Date</th>
                 <th scope="col">Partenaire</th>
                 <th scope="col">Prix</th>
+                <th scope="col">Id pour offrir</th>
                 <th scope="col">Choisir Mot de passe</th>
                 <th scope="col">Offrir</th>
             </tr>
@@ -20,6 +21,7 @@
                     <td><?= $possesse['possession_date'] ?></td>
                     <td><?= $possesse['chosen_partner_email'] ?></td>
                     <td><?= $possesse['box_price'] ?></td>
+                    <td><?= $possesse['purchase_id'] ?></td>
                     <td><input type="password" name="password" class="offer-password"></td>
                     <td><input type="checkbox" data-possession-id="<?=$possesse['possession_id']?>" name="checkbox" class="offer-checkbox"></td>
                 </tr>
@@ -34,7 +36,7 @@
             var possessionId = $(this).data('possession-id');
             var isChecked = $(this).is(':checked');
             var selectedValue = (isChecked) ? 'true' : 'false';
-            var password = $('input[name="password"]').val(); // Récupérer la valeur de l'input
+            var password = $(this).closest('tr').find('input[name="password"]').val();
             window.location.href = "index.php?controller=user&task=index&section=possessed&selected=" + selectedValue + "&possession_id=" + possessionId + '&password=' + password;
         });
     });

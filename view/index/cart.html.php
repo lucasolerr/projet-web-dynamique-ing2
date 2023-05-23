@@ -1,5 +1,5 @@
 <!-- Barre de navigation -->
-<div id="1" class="bg-purple text-white" style="background: linear-gradient(94.59deg, #4923B4 2.39%, #E878CF 97.66%);">
+<div id="1" class="bg-purple text-white" style="background: linear-gradient(94.59deg, #4923B4 2.39%, #E878CF 97.66%); height: 100vh;">
     <nav class="navbar navbar-expand-lg">
         <div class="container">
             <a href="#" class="navbar-brand">
