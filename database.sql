@@ -1,6 +1,6 @@
-DROP DATABASE IF EXISTS OMNESBOX;
-CREATE DATABASE OMNESBOX;
-USE OMNESBOX;
+DROP DATABASE IF EXISTS DBOMNESBOX;
+CREATE DATABASE DBOMNESBOX;
+USE DBOMNESBOX;
 
 DROP TABLE IF EXISTS account;
 DROP TABLE IF EXISTS activity;
@@ -99,56 +99,77 @@ CREATE TABLE used(
     CONSTRAINT FK15 FOREIGN KEY (user_email) REFERENCES account(email)
 );
 
-INSERT INTO account (email,last_name,first_name,account_password,account_type) VALUES
-("louis.renaud@edu.ece.fr","RENAUD","Louis","123456789","admin"),
-("quentin.sornin@edu.ece.fr","SORNIN","Quentin","123456789","admin"),
-("luca.soler@edu.ece.fr","SOLER SOCIETY","","123456789","partner"),
-("antoine.grenouillet@edu.ece.fr","ANTOINE SARL","","123456789","partner"),
-("sioul.duaner@gmail.com","RENAUD","Louis","123456789","user"),
-("bla.bla@gmail.com","BLA","BLA","123456789","user");
+INSERT INTO account (email, last_name, first_name, account_password, account_type) VALUES
+("admin1@example.com", "Admin", "User", "password123", "admin"),
+("partner1@example.com", "Partner", "User", "password123", "partner"),
+("partner2@example.com", "Partner", "User", "password123", "partner"),
+("user1@example.com", "Regular", "User", "password123", "user"),
+("user2@example.com", "Regular", "User", "password123", "user"),
+("user3@example.com", "Regular", "User", "password123", "user"),
+("user4@example.com", "Regular", "User", "password123", "user");
 
-INSERT INTO activity (activity_title,activity_content) VALUES
-("cours","Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean tincidunt tincidunt erat, id congue lacus fermentum sit amet. Curabitur eget eros ut metus tristique rhoncus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ex diam, ornare a vulputate in, tincidunt ac nisi. Nullam porta vehicula malesuada. Morbi mollis accumsan elit, sit amet mattis erat rutrum in. In suscipit odio at eros posuere vehicula. "),
-("concours","Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean tincidunt tincidunt erat, id congue lacus fermentum sit amet. Curabitur eget eros ut metus tristique rhoncus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ex diam, ornare a vulputate in, tincidunt ac nisi. Nullam porta vehicula malesuada. Morbi mollis accumsan elit, sit amet mattis erat rutrum in. In suscipit odio at eros posuere vehicula. "),
-("conference","Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean tincidunt tincidunt erat, id congue lacus fermentum sit amet. Curabitur eget eros ut metus tristique rhoncus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ex diam, ornare a vulputate in, tincidunt ac nisi. Nullam porta vehicula malesuada. Morbi mollis accumsan elit, sit amet mattis erat rutrum in. In suscipit odio at eros posuere vehicula. ");
+INSERT INTO activity (activity_title, activity_content) VALUES
+("cours", "Apprenez de nouvelles compétences avec nos cours en ligne."),
+("conference", "Élargissez vos connaissances lors de nos conférences inspirantes."),
+("concours", "Participez à nos concours pour gagner des prix incroyables."),
+("vacances", "Offrez-vous des vacances de rêve dans des destinations paradisiaques."),
+("restaurant", "Découvrez des saveurs exquises dans nos restaurants partenaires."),
+("randonnee", "Explorez les sentiers magnifiques de nos régions naturelles."),
+("theatre", "Plongez dans l'univers captivant du théâtre avec nos représentations."),
+("cinema", "Profitez des derniers blockbusters dans nos salles de cinéma."),
+("concert", "Vibrez au son de la musique lors de nos concerts live."),
+("exposition", "Découvrez l'art contemporain dans nos expositions renommées.");
 
-INSERT INTO omnesbox (box_title,activity_id) VALUES
-("cours info 1h",1),
-("cours info 2h",1),
-("cours elec 4h",1),
-("cours info 4h",1),
-("conference informatique",3),
-("conference electronique",3);
+INSERT INTO omnesbox (box_title, activity_id) VALUES
 
-INSERT INTO activity_offer (partner_email,activity_id) VALUES
-("luca.soler@edu.ece.fr",1),
-("luca.soler@edu.ece.fr",3),
-("antoine.grenouillet@edu.ece.fr",2),
-("antoine.grenouillet@edu.ece.fr",3);
+("Cours de Cuisine - Débutant", 1),
+("Cours de Cuisine - Avancé", 1),
+("Cours de Cuisine - Spécialités régionales", 1),
+("Conférence sur l'Entrepreneuriat - Stratégies gagnantes", 2),
+("Conférence sur l'Intelligence Artificielle - Nouvelles perspectives", 2),
+("Conférence sur la Psychologie Positive - Bien-être et épanouissement", 2),
+("Concours de Photographie - Thème : Nature", 3),
+("Concours de Dessin - Style libre", 3),
+("Concours de Poésie - Poèmes engagés", 3),
+("Vacances à la Plage - Destination : Bali", 4),
+("Vacances à la Montagne - Chalet de luxe", 4),
+("Vacances en Ville - Séjour dans une métropole", 4),
+("Dîner Gastronomique - Menu dégustation", 5),
+("Brunch Chic - Spécialités du terroir", 5),
+("Dîner Romantique - Ambiance feutrée", 5),
+("Randonnée en Montagne - Parc national des Alpes", 6),
+("Randonnée en Forêt - Sentiers enchantés", 6),
+("Randonnée Côtière - Vue panoramique sur l'océan", 6),
+("Pièce de Théâtre Comique - Comédie enlevée", 7),
+("Pièce de Théâtre Dramatique - Emotions intenses", 7),
+("Pièce de Théâtre Musicale - Chants et danses", 7),
+("Projection de Films Cultes - Sélection exclusive", 8),
+("Avant-Première d'un Blockbuster - Soirée VIP", 8),
+("Marathon Cinéphile - Films à la suite", 8),
+("Concert de Musique Live - Artiste surprise", 9),
+("Concert de Jazz - Ambiance chaleureuse", 9),
+("Concert de Rock - Énergie débordante", 9),
+("Exposition d'Art Moderne - Nouvelles tendances", 10),
+("Exposition de Photographie - Regards captivants", 10),
+("Exposition de Sculptures - Formes surprenantes", 10);
 
-INSERT INTO box_offer (partner_email,box_id,box_price,box_content) VALUES
-("luca.soler@edu.ece.fr",1,19.99, "Lorem ipsum blablablablablablabla"),
-("luca.soler@edu.ece.fr",2,29.99, "Lorem ipsum blablablablablablabla"),
-("luca.soler@edu.ece.fr",4,59.99, "Lorem ipsum blablablablablablabla"),
-("luca.soler@edu.ece.fr",5,30, "Lorem ipsum blablablablablablabla"),
-("antoine.grenouillet@edu.ece.fr",6,25, "Lorem ipsum blablablablablablabla");
+INSERT INTO activity_offer (partner_email, activity_id) VALUES
+("partner1@example.com", 1),
+("partner1@example.com", 2),
+("partner1@example.com", 3),
+("partner2@example.com", 4),
+("partner2@example.com", 5),
+("partner2@example.com", 6);
 
-INSERT INTO in_cart(user_email,box_id,articles_number, chosen_partner_email) VALUES
-("sioul.duaner@gmail.com",1,3,"luca.soler@edu.ece.fr"),
-("sioul.duaner@gmail.com",2,1,"luca.soler@edu.ece.fr");
-
-INSERT INTO purchase(user_email,box_id,purchase_date,chosen_partner_email) VALUES
-("bla.bla@gmail.com",1,'2023-05-02',"luca.soler@edu.ece.fr"),
-("bla.bla@gmail.com",2,'2023-05-03',"luca.soler@edu.ece.fr"),
-("sioul.duaner@gmail.com",2,'2023-05-03',"luca.soler@edu.ece.fr"),
-("sioul.duaner@gmail.com",4,'2023-05-03',"luca.soler@edu.ece.fr");
-
-INSERT INTO to_offer(to_offer_id,to_offer_password) VALUES
-(2,"123456789");
-
-INSERT INTO possession(possession_id,user_email,possession_date) VALUES
-(1,"bla.bla@gmail.com",'2023-05-02'),
-(4,"sioul.duaner@gmail.com",'2023-05-03');
-
-INSERT INTO used(used_id,user_email,used_date,grade,comment) VALUES
-(3,"sioul.duaner@gmail.com",'2023-05-03',4,"tres bien !!!");
+INSERT INTO box_offer (partner_email, box_id, box_content, box_price) VALUES
+("partner1@example.com", 1, "Découvrez notre boîte cadeau 'Cours de Cuisine - Débutant' qui vous permettra d'apprendre les bases de la cuisine française. Cette boîte comprend un cours de cuisine interactif animé par un chef renommé, un livre de recettes exclusives et des ustensiles de cuisine de haute qualité. Offrez-vous une expérience culinaire inoubliable !", 49.99),
+("partner1@example.com", 7, "Plongez dans le monde de la photographie avec notre boîte cadeau 'Concours de Photographie - Thème : Nature'. Capturez les beautés de la nature et participez à notre concours pour avoir la chance de remporter de superbes prix. Cette boîte comprend un appareil photo professionnel, des accessoires de photographie et un guide pratique pour améliorer vos compétences. Exprimez votre créativité et immortalisez des moments uniques !", 59.99),
+("partner1@example.com", 28, "Découvrez l'art contemporain avec notre boîte cadeau 'Exposition d'Art Moderne - Nouvelles tendances'. Visitez les galeries d'art les plus prestigieuses de la ville et admirez des œuvres d'artistes renommés. Cette boîte comprend des billets d'entrée VIP, une visite guidée privée et un catalogue d'exposition exclusif. Plongez dans l'univers fascinant de l'art moderne !", 39.99),
+("partner2@example.com", 19, "Profitez d'une soirée inoubliable au théâtre avec notre boîte cadeau 'Pièce de Théâtre Comique - Comédie enlevée'. Riez aux éclats en regardant une comédie hilarante interprétée par des acteurs talentueux. Cette boîte comprend des places de première catégorie, des rafraîchissements pendant l'entracte et une rencontre avec les membres de la troupe. Laissez-vous emporter par le rire et la bonne humeur !", 49.99),
+("partner2@example.com", 25, "Vivez une expérience musicale unique avec notre boîte cadeau 'Concert de Musique Live - Artiste surprise'. Assistez à un concert époustouflant d'un artiste de renommée mondiale dans une salle de concert prestigieuse. Cette boîte comprend des places VIP, un accès aux coulisses et un album dédicacé en souvenir. Laissez-vous envoûter par la magie de la musique en direct !", 69.99),
+("partner2@example.com", 11, "Échappez-vous de la routine quotidienne avec notre boîte cadeau 'Vacances à la Montagne - Chalet de luxe'. Profitez d'un séjour de détente dans un chalet de montagne confortable et élégant. Cette boîte comprend l'hébergement pour deux personnes, des activités de plein air, des repas gastronomiques et l'accès à un spa de luxe. Offrez-vous des moments de tranquillité et de ressourcement au cœur de la nature !", 299.99),
+("partner2@example.com", 12, "Explorez une métropole vibrante avec notre boîte cadeau 'Vacances en Ville - Séjour dans une métropole'. Découvrez les sites emblématiques, la culture dynamique et la cuisine délicieuse de la ville. Cette boîte comprend l'hébergement dans un hôtel de luxe, des visites guidées passionnantes et des repas gastronomiques. Plongez dans l'effervescence urbaine et créez des souvenirs inoubliables !", 399.99),
+("partner1@example.com", 13, "Savourez un délicieux dîner gastronomique avec notre boîte cadeau 'Dîner Gastronomique - Menu dégustation'. Dégustez des plats exquis préparés par un chef étoilé dans un cadre élégant. Cette boîte comprend un menu dégustation avec des accords mets-vins, un service attentionné et une expérience culinaire raffinée. Laissez-vous séduire par les saveurs et les textures exceptionnelles !", 149.99),
+("partner1@example.com", 16, "Partez à l'aventure avec notre boîte cadeau 'Randonnée en Montagne - Parc national des Alpes'. Explorez des sentiers pittoresques, admirez des panoramas époustouflants et connectez-vous avec la nature. Cette boîte comprend un guide expérimenté, un équipement de randonnée de qualité et des moments de tranquillité au cœur des montagnes. Évadez-vous et découvrez la beauté des Alpes !", 89.99),
+("partner1@example.com", 17, "Plongez dans la nature avec notre boîte cadeau 'Randonnée en Forêt - Sentiers enchantés'. Explorez des forêts luxuriantes, découvrez des cascades cachées et observez une faune et une flore fascinantes. Cette boîte comprend un guide naturaliste, un pique-nique gourmet et des moments de sérénité au milieu des arbres. Laissez-vous émerveiller par la magie de la nature !", 79.99),
+("partner2@example.com", 18, "Admirez des paysages côtiers spectaculaires avec notre boîte cadeau 'Randonnée Côtière - Vue panoramique sur l'océan'. Parcourez des sentiers côtiers pittoresques, découvrez des plages isolées et profitez d'une brise marine revigorante. Cette boîte comprend un guide expérimenté, un panier-repas gourmand et des moments de détente face à l'océan. Échappez au quotidien et reconnectez-vous à la nature !", 94.99);

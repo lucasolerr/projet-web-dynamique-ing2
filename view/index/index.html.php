@@ -116,7 +116,9 @@
                         <?php $nom = $box['activity'];
                         $chemin_image = "/projet-web-dynamique-3g/public/assets/index/" . $nom . ".jpg";
                         ?>
-                        <img class="card-img-top" src=<?= $chemin_image ?> alt="cover">
+                        <div class="conteneur-img">
+                            <img class="card-img-top" src=<?= $chemin_image ?> alt="cover">
+                        </div>
                         <div class="card-body">
                             <h5 class="card-title"><?= $box['title'] ?></h5>
                             <div class="d-flex justify-content-between align-items-center">
@@ -418,5 +420,17 @@
         width: 100%;
         z-index: 1000;
         background-image: linear-gradient(94.59deg, #4923B4, #E878CF);
+    }
+
+    .conteneur-img {
+        height: 200px;
+        /* Ajustez la hauteur selon vos besoins */
+        overflow: hidden;
+    }
+
+    .conteneur-img img {
+        object-fit: cover;
+        height: 100%;
+        width: 100%;
     }
 </style>
