@@ -6,7 +6,7 @@
                 <th scope="col">Id</th>
                 <th scope="col">Titre</th>
                 <th scope="col">Activité</th>
-                <th scope="col">Id</th>
+                <th scope="col">Id Activitée</th>
             </tr>
         </thead>
         <tbody>

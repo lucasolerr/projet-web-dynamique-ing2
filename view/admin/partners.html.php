@@ -1,5 +1,5 @@
 <h2>Partenaires</h2>
-<div class="table-responsive">
+<div class="table-responsive" style="height: 100vh">
     <table class="table table-striped table-sm">
         <thead>
             <tr>
