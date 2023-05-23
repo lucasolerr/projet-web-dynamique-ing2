@@ -60,8 +60,7 @@
             <div class="col-md-6">
                 <h2>Venez ACHETER une carte cadeau</h2>
                 <p>Découvrez notre vaste sélection de cartes cadeaux et offrez un présent unique à vos proches. Notre section "J'ai une Omnesbox" vous propose d'offrir une expérience de shopping en ligne pratique et agréable.</p>
-                <button class="btn btn-lg btn-primary" style="background-color:#FF41C6; border: none;">Acheter</button>
-                <button class="btn btn-lg btn-secondary">Infos</button>
+                <button class="btn btn-lg btn-primary" id="buy" style="background-color:#FF41C6; border: none;">Acheter</button>
             </div>
             <div class="col-md-6 d-flex justify-content-center">
                 <img class="img-fluid" src="/projet-web-dynamique-3g/public/assets/index/illustration.png" alt="illustration">
@@ -148,7 +147,7 @@
         <?php endif;
         endforeach; ?>
     </div>
-    <div id="3" class="container">
+    <div id="3">
         <?= $hasBoxSection ?>
     </div>
 </div>
@@ -339,6 +338,10 @@
                 $(".card-container").not('.' + value).hide();
                 $('.card-container').filter('.' + value).show();
             }
+        });
+
+        $('#buy').click(function() {
+            window.location.href = 'index.php?controller=index&task=index#2';
         });
 
         $('.card-container').click(function() {
