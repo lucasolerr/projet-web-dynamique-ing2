@@ -151,7 +151,6 @@
         </div>
     </div>
 </div>
-
 <script>
     $(document).ready(function() {
         $('#cart').click(function() {

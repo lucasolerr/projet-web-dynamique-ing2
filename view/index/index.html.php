@@ -102,8 +102,11 @@
                 <button type="button" class="btn btn-secondary filter-button" data-filter="all">Tous</button>
                 <button type="button" class="btn btn-secondary filter-button" data-filter="price-asc">Prix croissant</button>
                 <button type="button" class="btn btn-secondary filter-button" data-filter="price-desc">Prix décroissant</button>
-                <?php foreach ($activities as $activity) : ?>
-                    <button type="button" class="btn btn-secondary filter-button" data-filter="<?= $activity['activity_title'] ?>"><?= $activity['activity_title'] ?></button>
+                <?php $activityCount = count($activities); ?>
+                <?php foreach ($activities as $index => $activity) : ?>
+                    <?php if ($index < 5) : ?>
+                        <button type="button" class="btn btn-secondary filter-button" data-filter="<?= $activity['activity_title'] ?>"><?= $activity['activity_title'] ?></button>
+                    <?php endif; ?>
                 <?php endforeach; ?>
             </div>
         </div>

@@ -55,10 +55,12 @@ class Partner extends Account
         }
         $selected = filter_input(INPUT_GET, 'selected', FILTER_VALIDATE_BOOLEAN);
         $box_id = filter_input(INPUT_GET, 'box_id', FILTER_VALIDATE_INT);
-        $box_content = $_GET['box_content'];
+        if (!empty($_GET['box_content'])) {
+            $box_content = $_GET['box_content'];
+        }
         //Attention erreur quand les champs sont vides à corriger
         $box_price = filter_input(INPUT_GET, 'box_price', FILTER_VALIDATE_FLOAT);
-        if (!is_null($selected) && !is_null($box_id) && !is_null($box_content) && !is_null($box_price)) {
+        if (!is_null($selected) && !is_null($box_id) && !is_null($box_price)) {
             if ($this->model->isActivitySelectedForPartner($activity_id)) {
                 if ($selected === true) {
                     $this->model->addBoxForPartner($box_id, $box_content, $box_price);
