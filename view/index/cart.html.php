@@ -59,7 +59,10 @@
                 <?php foreach ($cart as $cart) : ?>
                     <div class="row p-3 ">
                         <div class="col-md-3 ">
-                            <img src="public/assets/box/parachute.jpg" class="rounded img-fluid">
+                            <?php $nom = $cart['activity_title'];
+                            $chemin_image = "/projet-web-dynamique-3g/public/assets/index/" . $nom . ".jpg";
+                            ?>
+                            <img src=<?= $chemin_image ?> class="rounded img-fluid">
                         </div>
                         <div class="col-md-4 ">
                             <h4><?= $cart['box_title'] ?></h4>

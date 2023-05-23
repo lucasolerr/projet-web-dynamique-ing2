@@ -97,6 +97,7 @@ class Index extends Model
         SELECT * FROM in_cart
         JOIN omnesbox on omnesbox.box_id = in_cart.box_id
         JOIN box_offer on chosen_partner_email = partner_email AND box_offer.box_id = omnesbox.box_id
+        JOIN activity on activity.activity_id = omnesbox.activity_id
         WHERE user_email = :email
         ";
         $query = $this->pdo->prepare($sql);
