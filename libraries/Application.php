@@ -7,14 +7,14 @@ class Application
         if(!empty($_GET['controller'])){
             $controllerName = ucfirst($_GET['controller']);
         } else {
-            echo "Erreur 404";
+            echo '<script>alert("Erreur 404 !");window.location.href = "index.php?controller=index&task=index";</script>';
             return;
         }
 
         if(!empty($_GET['task'])){
             $task = $_GET['task'];
         } else {
-            echo "Erreur 404";
+            echo '<script>alert("Erreur 404 !");window.location.href = "index.php?controller=index&task=index";</script>';
             return;
         }
         session_start();

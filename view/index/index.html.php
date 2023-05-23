@@ -1,6 +1,6 @@
 <!-- Barre de navigation -->
 <div id="1" class="bg-purple text-white" style="background: linear-gradient(94.59deg, #4923B4 2.39%, #E878CF 97.66%);">
-    <nav class="navbar navbar-expand-lg">
+    <nav class="navbar navbar-expand-lg fixed-navbar">
         <div class="container">
             <a href="#" class="navbar-brand">
                 <img src="/projet-web-dynamique-3g/public/assets/index/logo.svg" alt="Logo Omnesbox">
@@ -318,6 +318,13 @@
 
 <script>
     $(document).ready(function() {
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 0) {
+                $('.navbar').addClass('fixed-navbar');
+            } else {
+                $('.navbar').removeClass('fixed-navbar');
+            }
+        });
         $(".filter-button").click(function() {
             var value = $(this).attr('data-filter');
             if (value == "all") {
@@ -403,5 +410,13 @@
         background-color: #ccc;
         border-bottom: 1px solid #6f42c1;
         color: #333;
+    }
+
+    .fixed-navbar {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+        background-image: linear-gradient(94.59deg, #4923B4, #E878CF);
     }
 </style>
