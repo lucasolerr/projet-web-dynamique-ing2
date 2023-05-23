@@ -114,7 +114,7 @@ class Partner extends Account
         SELECT omnesbox.box_id, box_title, box_content, box_price, purchase.purchase_date, used.user_email FROM omnesbox
         JOIN purchase ON omnesbox.box_id = purchase.box_id
         JOIN used ON used.used_id = purchase.purchase_id
-        JOIN box_offer on box_offer.box_id = omnesbox.box_id
+        JOIN box_offer on box_offer.box_id = omnesbox.box_id AND purchase.chosen_partner_email = box_offer.partner_email
         WHERE chosen_partner_email = :partner_email AND omnesbox.box_id = :box_id
         ";
         $query = $this->pdo->prepare($sql);

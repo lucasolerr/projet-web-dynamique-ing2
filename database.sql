@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : mar. 23 mai 2023 à 19:38
+-- Généré le : mar. 23 mai 2023 à 20:56
 -- Version du serveur : 5.7.24
 -- Version de PHP : 8.0.1
 
@@ -93,12 +93,16 @@ CREATE TABLE `activity_offer` (
 
 INSERT INTO `activity_offer` (`partner_email`, `activity_id`) VALUES
 ('partner1@example.com', 1),
+('partner1@example.com', 2),
 ('partner1@example.com', 3),
+('partner1@example.com', 4),
 ('partner2@example.com', 4),
 ('partner1@example.com', 5),
+('partner2@example.com', 5),
 ('partner1@example.com', 6),
 ('partner2@example.com', 6),
 ('partner2@example.com', 7),
+('partner1@example.com', 8),
 ('partner2@example.com', 9),
 ('partner1@example.com', 10);
 
@@ -121,13 +125,20 @@ CREATE TABLE `box_offer` (
 
 INSERT INTO `box_offer` (`partner_email`, `box_id`, `box_content`, `box_price`) VALUES
 ('partner1@example.com', 1, 'Découvrez notre boîte cadeau \'Cours de Cuisine - Débutant\' qui vous permettra d\'apprendre les bases de la cuisine française. Cette boîte comprend un cours de cuisine interactif animé par un chef renommé, un livre de recettes exclusives et des ustensiles de cuisine de haute qualité. Offrez-vous une expérience culinaire inoubliable !', 49.99),
+('partner1@example.com', 3, 'Les \"Cours de Cuisine - Spécialités régionales\" vous offrent une expérience culinaire immersive et éducative. Cette box cadeau vous permet d\'explorer les saveurs uniques des spécialités régionales à travers des cours de cuisine passionnants. Vous aurez l\'occasion d\'apprendre les secrets et les techniques de préparation des plats emblématiques de différentes régions, mettant en valeur les ingrédients locaux et les traditions culinaires. Sous la guidance d\'un chef expérimenté, vous découvrirez comment créer des mets authentiques, des recettes traditionnelles aux touches créatives. C\'est une opportunité de développer vos compétences culinaires, d\'élargir vos connaissances gastronomiques et de vous imprégner de la richesse culturelle et gustative d\'une région spécifique. Que vous soyez un passionné de cuisine ou un amateur curieux, ces cours de cuisine vous permettront de vivre une expérience gustative unique et mémorable.', 24.99),
+('partner1@example.com', 4, 'La \"Conférence sur l\'Entrepreneuriat - Stratégies gagnantes\" est une box cadeau offrant une expérience inspirante et éducative. Assistez à une conférence animée par des experts de renom, découvrez des stratégies gagnantes et recevez des conseils pratiques pour réussir dans le monde des affaires. Une opportunité unique pour les passionnés d\'entrepreneuriat de développer leurs compétences et de créer des connexions précieuses.', 39.99),
+('partner1@example.com', 6, 'La \"Conférence sur la Psychologie Positive - Bien-être et épanouissement\" est une box cadeau qui offre une expérience enrichissante et inspirante. Plongez dans le monde de la psychologie positive et découvrez les clés du bien-être et de l\'épanouissement personnel. Cette conférence réunit des experts de renommée qui partageront des connaissances et des techniques pour cultiver le bonheur, la résilience et les relations épanouissantes. Une occasion unique de s\'épanouir et de développer une mentalité positive pour une vie plus équilibrée et épanouissante.', 9.99),
 ('partner1@example.com', 7, 'Plongez dans le monde de la photographie avec notre boîte cadeau \'Concours de Photographie - Thème : Nature\'. Capturez les beautés de la nature et participez à notre concours pour avoir la chance de remporter de superbes prix. Cette boîte comprend un appareil photo professionnel, des accessoires de photographie et un guide pratique pour améliorer vos compétences. Exprimez votre créativité et immortalisez des moments uniques !', 59.99),
+('partner1@example.com', 12, 'Venez séjourner dans la plus belle ville de France ! Une ville ensoleillée avec un accès direct sur la mer, venez séjourner à Marseille ! ', 259.99),
 ('partner1@example.com', 13, 'Savourez un délicieux dîner gastronomique avec notre boîte cadeau \'Dîner Gastronomique - Menu dégustation\'. Dégustez des plats exquis préparés par un chef étoilé dans un cadre élégant. Cette boîte comprend un menu dégustation avec des accords mets-vins, un service attentionné et une expérience culinaire raffinée. Laissez-vous séduire par les saveurs et les textures exceptionnelles !', 149.99),
 ('partner1@example.com', 16, 'Partez à l\'aventure avec notre boîte cadeau \'Randonnée en Montagne - Parc national des Alpes\'. Explorez des sentiers pittoresques, admirez des panoramas époustouflants et connectez-vous avec la nature. Cette boîte comprend un guide expérimenté, un équipement de randonnée de qualité et des moments de tranquillité au cœur des montagnes. Évadez-vous et découvrez la beauté des Alpes !', 89.99),
 ('partner1@example.com', 17, 'Plongez dans la nature avec notre boîte cadeau \'Randonnée en Forêt - Sentiers enchantés\'. Explorez des forêts luxuriantes, découvrez des cascades cachées et observez une faune et une flore fascinantes. Cette boîte comprend un guide naturaliste, un pique-nique gourmet et des moments de sérénité au milieu des arbres. Laissez-vous émerveiller par la magie de la nature !', 79.99),
+('partner1@example.com', 23, 'Venez assister à notre soirée exclusive en présence des acteurs et réalisateurs du dernier Marvel lors de la soirée Avant-première !', 29.99),
 ('partner1@example.com', 28, 'Découvrez l\'art contemporain avec notre boîte cadeau \'Exposition d\'Art Moderne - Nouvelles tendances\'. Visitez les galeries d\'art les plus prestigieuses de la ville et admirez des œuvres d\'artistes renommés. Cette boîte comprend des billets d\'entrée VIP, une visite guidée privée et un catalogue d\'exposition exclusif. Plongez dans l\'univers fascinant de l\'art moderne !', 39.99),
 ('partner2@example.com', 11, 'Échappez-vous de la routine quotidienne avec notre boîte cadeau \'Vacances à la Montagne - Chalet de luxe\'. Profitez d\'un séjour de détente dans un chalet de montagne confortable et élégant. Cette boîte comprend l\'hébergement pour deux personnes, des activités de plein air, des repas gastronomiques et l\'accès à un spa de luxe. Offrez-vous des moments de tranquillité et de ressourcement au cœur de la nature !', 299.99),
 ('partner2@example.com', 12, 'Explorez une métropole vibrante avec notre boîte cadeau \'Vacances en Ville - Séjour dans une métropole\'. Découvrez les sites emblématiques, la culture dynamique et la cuisine délicieuse de la ville. Cette boîte comprend l\'hébergement dans un hôtel de luxe, des visites guidées passionnantes et des repas gastronomiques. Plongez dans l\'effervescence urbaine et créez des souvenirs inoubliables !', 399.99),
+('partner2@example.com', 14, 'Le \"Brunch Chic - Spécialités du terroir\" est une expérience culinaire exceptionnelle qui ravira les amateurs de gastronomie. Cette box cadeau vous invite à déguster un délicieux brunch composé de spécialités du terroir soigneusement sélectionnées. Vous aurez l\'opportunité de savourer des mets authentiques et raffinés, mettant en valeur les produits locaux et les traditions culinaires régionales. Que ce soit des fromages artisanaux, des charcuteries fines, des confitures faites maison ou encore des pains et pâtisseries préparés avec amour, ce brunch chic vous promet une expérience gastronomique mémorable. Plongez dans les saveurs du terroir et laissez-vous séduire par ce festin gourmand qui met à l\'honneur les richesses de notre patrimoine culinaire.', 49.99),
+('partner2@example.com', 15, 'Le \"Dîner Romantique - Ambiance feutrée\" est une expérience magique qui vous transporte dans une atmosphère intime et chaleureuse. Cette box cadeau vous offre l\'occasion de partager un dîner inoubliable avec votre être cher, dans un cadre où règne une ambiance feutrée et romantique. Les lumières tamisées, la décoration élégante et les détails attentionnés créent une atmosphère propice à la complicité et à la connexion. Vous serez accueillis avec délicatesse et accompagnés tout au long de votre repas par un service attentionné. Les plats exquis, préparés avec passion et créativité, éveilleront vos papilles et raviront vos sens. Laissez-vous emporter par cette expérience romantique et partagez des moments précieux dans une ambiance magique et intime.', 29.99),
 ('partner2@example.com', 18, 'Admirez des paysages côtiers spectaculaires avec notre boîte cadeau \'Randonnée Côtière - Vue panoramique sur l\'océan\'. Parcourez des sentiers côtiers pittoresques, découvrez des plages isolées et profitez d\'une brise marine revigorante. Cette boîte comprend un guide expérimenté, un panier-repas gourmand et des moments de détente face à l\'océan. Échappez au quotidien et reconnectez-vous à la nature !', 94.99),
 ('partner2@example.com', 19, 'Profitez d\'une soirée inoubliable au théâtre avec notre boîte cadeau \'Pièce de Théâtre Comique - Comédie enlevée\'. Riez aux éclats en regardant une comédie hilarante interprétée par des acteurs talentueux. Cette boîte comprend des places de première catégorie, des rafraîchissements pendant l\'entracte et une rencontre avec les membres de la troupe. Laissez-vous emporter par le rire et la bonne humeur !', 49.99),
 ('partner2@example.com', 25, 'Vivez une expérience musicale unique avec notre boîte cadeau \'Concert de Musique Live - Artiste surprise\'. Assistez à un concert époustouflant d\'un artiste de renommée mondiale dans une salle de concert prestigieuse. Cette boîte comprend des places VIP, un accès aux coulisses et un album dédicacé en souvenir. Laissez-vous envoûter par la magie de la musique en direct !', 69.99);
@@ -219,6 +230,43 @@ CREATE TABLE `purchase` (
   `chosen_partner_email` varchar(40) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Déchargement des données de la table `purchase`
+--
+
+INSERT INTO `purchase` (`purchase_id`, `purchase_date`, `user_email`, `box_id`, `chosen_partner_email`) VALUES
+(1, '2023-05-23', 'user1@example.com', 11, 'partner2@example.com'),
+(2, '2023-05-23', 'user1@example.com', 13, 'partner1@example.com'),
+(3, '2023-05-23', 'user1@example.com', 18, 'partner2@example.com'),
+(4, '2023-05-23', 'user1@example.com', 28, 'partner1@example.com'),
+(5, '2023-05-23', 'user1@example.com', 1, 'partner1@example.com'),
+(6, '2023-05-23', 'user1@example.com', 7, 'partner1@example.com'),
+(7, '2023-05-23', 'user1@example.com', 12, 'partner2@example.com'),
+(8, '2023-05-23', 'user1@example.com', 16, 'partner1@example.com'),
+(9, '2023-05-23', 'user1@example.com', 17, 'partner1@example.com'),
+(10, '2023-05-23', 'user1@example.com', 19, 'partner2@example.com'),
+(11, '2023-05-23', 'user1@example.com', 25, 'partner2@example.com'),
+(12, '2023-05-23', 'user2@example.com', 1, 'partner1@example.com'),
+(13, '2023-05-23', 'user2@example.com', 11, 'partner2@example.com'),
+(14, '2023-05-23', 'user2@example.com', 16, 'partner1@example.com'),
+(15, '2023-05-23', 'user2@example.com', 18, 'partner2@example.com'),
+(16, '2023-05-23', 'user2@example.com', 25, 'partner2@example.com'),
+(17, '2023-05-23', 'user2@example.com', 25, 'partner2@example.com'),
+(18, '2023-05-23', 'user4@example.com', 3, 'partner1@example.com'),
+(19, '2023-05-23', 'user4@example.com', 4, 'partner1@example.com'),
+(20, '2023-05-23', 'user4@example.com', 6, 'partner1@example.com'),
+(21, '2023-05-23', 'user4@example.com', 6, 'partner1@example.com'),
+(22, '2023-05-23', 'user4@example.com', 6, 'partner1@example.com'),
+(23, '2023-05-23', 'user4@example.com', 14, 'partner2@example.com'),
+(24, '2023-05-23', 'user4@example.com', 14, 'partner2@example.com'),
+(25, '2023-05-23', 'user4@example.com', 23, 'partner1@example.com'),
+(26, '2023-05-23', 'user4@example.com', 23, 'partner1@example.com'),
+(27, '2023-05-23', 'user4@example.com', 23, 'partner1@example.com'),
+(28, '2023-05-23', 'user4@example.com', 23, 'partner1@example.com'),
+(29, '2023-05-23', 'user4@example.com', 23, 'partner1@example.com'),
+(30, '2023-05-23', 'user2@example.com', 15, 'partner2@example.com'),
+(31, '2023-05-23', 'user2@example.com', 15, 'partner2@example.com');
+
 -- --------------------------------------------------------
 
 --
@@ -243,6 +291,43 @@ CREATE TABLE `used` (
   `comment` text,
   `user_email` varchar(40) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `used`
+--
+
+INSERT INTO `used` (`used_id`, `used_date`, `grade`, `comment`, `user_email`) VALUES
+(1, '2023-05-23', 5, 'Qualité du mobilier exceptionnelle ! Vue panoramique sur la valée', 'user1@example.com'),
+(2, '2023-05-23', 5, 'Repas divers et goûts fins !', 'user1@example.com'),
+(3, '2023-05-23', 3, 'Randonée très éprouvante', 'user1@example.com'),
+(4, '2023-05-23', 4, 'Tendances laissant à désirer...', 'user1@example.com'),
+(5, '2023-05-23', 5, 'Produits de qualités, explications détaillées !', 'user1@example.com'),
+(6, '2023-05-23', 2, 'Un peu cher...', 'user1@example.com'),
+(7, '2023-05-23', 4, 'J\'adore NYC', 'user1@example.com'),
+(8, '2023-05-23', 5, 'Météo pluvieuse', 'user1@example.com'),
+(9, '2023-05-23', 2, 'Insectes omniprésents', 'user1@example.com'),
+(10, '2023-05-23', 4, 'Pièce très comique', 'user1@example.com'),
+(11, '2023-05-23', 1, 'Artiste inconnu', 'user1@example.com'),
+(12, '2023-05-23', 4, 'Très bons ustensiles', 'user2@example.com'),
+(13, '2023-05-23', 5, 'Chalet exceptionnel', 'user2@example.com'),
+(14, '2023-05-23', 4, 'Physiquement intense', 'user2@example.com'),
+(15, '2023-05-23', 5, 'Vue splendide', 'user2@example.com'),
+(16, '2023-05-23', 2, 'Artiste décevant', 'user2@example.com'),
+(17, '2023-05-23', 1, 'Je ne connaissais pas l\'artiste...', 'user2@example.com'),
+(18, '2023-05-23', 2, 'Je n\'aime pas les produits Corses !', 'user4@example.com'),
+(19, '2023-05-23', 1, 'Présenté par Oussama Amar...', 'user4@example.com'),
+(20, '2023-05-23', 5, 'Très intéressant !', 'user4@example.com'),
+(21, '2023-05-23', 5, 'Captivant', 'user4@example.com'),
+(22, '2023-05-23', 5, 'Génial', 'user4@example.com'),
+(23, '2023-05-23', 3, 'Peu consistant', 'user4@example.com'),
+(24, '2023-05-23', 4, 'Il manquait peut-être de la quantitée', 'user4@example.com'),
+(25, '2023-05-23', 5, 'J\'ai rencontré Brad Pitt !!!', 'user4@example.com'),
+(26, '2023-05-23', 5, 'Brad Pitt <333', 'user4@example.com'),
+(27, '2023-05-23', 5, 'Il y avait Natalie Portman lors de la soirée :)', 'user4@example.com'),
+(28, '2023-05-23', 5, 'Super acteurs', 'user4@example.com'),
+(29, '2023-05-23', 5, 'J\'ai rencontré Christopher Nolan en personne', 'user4@example.com'),
+(30, '2023-05-23', 5, 'Ambiance chaleureuse !', 'user3@example.com'),
+(31, '2023-05-23', 5, 'Ambiance caliente ;)', 'user3@example.com');
 
 --
 -- Index pour les tables déchargées
@@ -338,7 +423,7 @@ ALTER TABLE `omnesbox`
 -- AUTO_INCREMENT pour la table `purchase`
 --
 ALTER TABLE `purchase`
-  MODIFY `purchase_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `purchase_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- Contraintes pour les tables déchargées

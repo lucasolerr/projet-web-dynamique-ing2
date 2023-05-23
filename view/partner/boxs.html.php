@@ -59,8 +59,8 @@
             var boxId = $(this).data('box-id');
             var isChecked = $(this).is(':checked');
             var selectedValue = (isChecked) ? 'true' : 'false';
-            var boxPrice = $('input[name="box_price"]').val(); // Récupérer la valeur de l'input
-            var boxContent = $('input[name="box_content"]').val();
+            var boxContent = $(this).closest('tr').find('input[name="box_content"]').val();
+            var boxPrice = $(this).closest('tr').find('input[name="box_price"]').val();
             $('#box-form').attr('action', 'index.php?controller=partner&task=index&section=boxs&activity_id=<?= $_GET['activity_id']; ?>&selected=' + selectedValue + '&box_id=' + boxId + '&box_content=' + boxContent + '&box_price=' + boxPrice);
             $('#box-form').submit();
         });
