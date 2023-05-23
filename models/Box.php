@@ -9,6 +9,8 @@ class Box extends Model
         $query = "
         SELECT * FROM omnesbox
         JOIN box_offer ON omnesbox.box_id = box_offer.box_id 
+        JOIN activity_offer ON activity_offer.activity_id = omnesbox.activity_id AND box_offer.partner_email = activity_offer.partner_email
+        JOIN activity ON activity.activity_id = activity_offer.activity_id
         WHERE omnesbox.box_id = :box_id
         AND box_offer.partner_email = :email";
         $stmt = $this->pdo->prepare($query);
