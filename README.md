@@ -1,6 +1,6 @@
 # OmnesBox - Système de Cartes Cadeau
 
-Bienvenue dans le projet OmnesBox, un système de cartes cadeau dynamique pour la communauté Omnes. Ce projet a été développé dans le cadre du cours de Projet Web Dynamique ING2 2023. OmnesBox vous permet d'acheter des cartes cadeau pour offrir à vos proches ou à vous-même, offrant une variété d'activités passionnantes à choisir.
+Bienvenue dans le projet OmnesBox, un système de cartes cadeau. Ce projet a été développé dans le cadre du cours de Projet Web Dynamique ING2 2023. OmnesBox vous permet d'acheter des cartes cadeau pour offrir à vos proches ou à vous-même, offrant une variété d'activités passionnantes à choisir.
 
 ## Fonctionnalités Principales
 
@@ -27,7 +27,5 @@ Bienvenue dans le projet OmnesBox, un système de cartes cadeau dynamique pour l
 
 - **Premier livrable (7 mai) :** Conception du projet avec architecture front-end et back-end, maquettes, modèle entité-association de la base de données.
 - **Deuxième livrable (23 mai) :** Code source sur GitHub, présentation PowerPoint, rapport de travail individuel et collectif.
-
-Rejoignez-nous dans ce passionnant projet pour créer une plateforme de cartes cadeau innovante pour la communauté Omnes.
 
 ![Image d'exemple](screenshot.png)
